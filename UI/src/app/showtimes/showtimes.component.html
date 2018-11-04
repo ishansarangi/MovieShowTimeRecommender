@@ -1,0 +1,48 @@
+<div class="container-fluid" [ngStyle]="movieStyle">
+  <div class="row">
+    <p-card>
+      <div class="container-fluid" style="width:100%">
+        <div class="row">
+          <div class="col-md-2 poster" [ngStyle]="setMyStyle()"></div>
+          <div class="col-md-10">
+            <div class="row">
+              <div class="col-md-6">
+                <h2>
+                  {{movieName}}
+                </h2>
+
+              </div>
+
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <h4>
+                  {{movieDesc}}
+                </h4>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </p-card>
+  </div>
+  <div class="row" *ngFor="let theatre of finalTheatreList">
+    <div class="col-md-12" style="padding-top:3em;">
+        <div class="container-fluid theatres" >
+            <div class="row" style="padding-top: 2em">
+              <div class="ui-grid-col-12">
+                <h3 style="color:white;text-align: center;">{{theatre.name}}</h3>
+              </div>
+            </div>
+            <div class="row" style="padding-top: 2em">
+              <div class="col-md-3" style="padding: 2em" *ngFor="let show of theatre.movieList">
+                <button pButton type="button" (click)="bookPage(show.booking_link)" label="{{show.date}} {{show.time}}"></button>
+              </div>
+            </div>
+          </div>
+    </div>
+    
+  </div>
+
+
+</div>

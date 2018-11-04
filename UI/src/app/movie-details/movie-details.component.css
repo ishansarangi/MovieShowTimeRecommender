@@ -1,0 +1,29 @@
+#movieTitle{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: bold;
+    align-self: center;
+}
+.ui-carousel-header{
+    background-color: beige;
+}
+.ui-carousel-viewport{
+    background-color: beige;
+}
+:host >>>  .ui-carousel .ui-carousel-viewport {
+    border: 1px solid #252424;
+    background-color: rgb(20, 19, 19);
+}
+:host >>>  .ui-carousel .ui-carousel-viewport .ui-carousel-items .ui-carousel-item {
+    border: 0px solid #191919; 
+    padding-left: 0.8em;
+}
+:host >>>  .ui-carousel .ui-carousel-header {
+    background-color: #191919;
+    text-align: center;
+    height: 2.5em;
+}
+:host >>> .ui-carousel .ui-carousel-header .ui-carousel-header-title {
+    font-family: "source sans pro",Arial,sans-serif;
+    font-size: 1.5em;
+    padding-bottom: 0.3em;
+}

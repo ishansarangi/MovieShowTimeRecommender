@@ -1,0 +1,76 @@
+.dropdown:hover .dropdown-menu {
+    display: block;
+    width: 100%;
+    border: none;
+    }
+
+body .ui-tabview .ui-tabview-panels{
+    color: #292828;
+}     
+label{
+    color: #020202;
+} 
+.button1 {
+    border-radius: 4px;
+    font-size: 1em;
+}
+.alert-danger {
+    color: #fcfcfc;
+    background-color: #aa3d3d;
+    border-color: #883442;
+  }
+  :host>>> .ui-widget {
+    font-size: 12px;
+  }
+  :host>>> .ui-widget {
+    font-size: 1.05em;
+  }  
+  :host>>> .ui-datepicker {
+      padding:0;
+      background-color:white;
+      color:black;
+      min-width:0;
+  }
+  :host>>> .ui-datepicker table {
+      margin: 0;
+      font-size:10px;
+  }
+  :host>>>  .ui-datepicker-year{
+    color:black;
+
+  }
+  :host>>>  .ui-datepicker-month{
+    color:black;
+
+  }
+  :host>>>  .ui-inputtext{
+    background-color:white;
+    color:black;
+    border:1px solid #ccc;
+  }
+.row{
+    padding-top:1.5em;
+}
+span.fa.fa-calendar{
+    height: 100%;
+    width: 100%;
+    color: rgb(56, 145, 204);
+}
+.input-group-addon{
+    padding-bottom: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
+    padding-top: 0px;
+    background-color: #ffffff;
+}
+.input-group-addon button{
+   
+    padding-bottom: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
+    padding-top: 0px;
+}
+.button1{
+    background-color: rgb(56, 145, 204);
+    border-color: rgb(56, 145, 204);
+}

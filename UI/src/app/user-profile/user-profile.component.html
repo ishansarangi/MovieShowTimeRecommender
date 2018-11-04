@@ -1,0 +1,93 @@
+<div class="container-fluid mainContainer" style="padding-top:1em;">
+    <div class="row">
+        <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
+            <span class="ui-float-label">
+                <input id="float-input-uName" [disabled] = "true" [(ngModel)]="user.userName" type="text" size="35" pKeyFilter="alphanum" pInputText>
+                <label for="float-input-uName">User Name</label>
+            </span>
+        </div>
+    </div>
+    <div class="row" style="padding-top:1.5em;">
+      <div class="col-sm-10 col-md-10 col-lg-10 col-xl-10">
+          <span class="ui-float-label">
+              <input id="float-input-fName" [(disabled)] = "!isEditing" [(ngModel)]="user.firstName" type="text" size="35" pKeyFilter="alpha" pInputText>
+              <label for="float-input-fName">First Name</label>
+          </span>
+      </div>
+  </div>
+  <div class="row" style="padding-top:1.5em;">
+      <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
+          <span class="ui-float-label">
+              <input id="float-input-lName" [(disabled)] = "!isEditing" [(ngModel)]="user.lastName"  type="text" size="35" pKeyFilter="alpha" pInputText>
+              <label for="float-input-lName">Last Name</label>
+          </span>
+      </div>
+  </div>
+  <div class="row" style="padding-top:1.5em;">
+      <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
+          <span class="ui-float-label">
+              <input id="float-input-email" [disabled] = "true" [(ngModel)]="user.userEmailId" type="email" size="35" pKeyFilter="email" pInputText>
+              <label for="float-input-email">Email</label>
+          </span>
+      </div>
+  </div>
+  <div class="row" style="padding-top:1.5em;">
+      <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
+          <span class="ui-float-label">
+              <input id="float-input-mob" [(disabled)] = "!isEditing" equired="true" minlength="10" maxlength="10" [(ngModel)]="user.userContactNo" type="text"
+                  size="35" pKeyFilter="pint" pInputText>
+              <label for="float-input-mob">Mobile</label>
+          </span>
+      </div>
+  </div>
+  <div class="row" style="padding-top:1.5em;">
+      <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
+          <span class="ui-float-label">
+              <p-calendar id="float-input-dob" [(disabled)] = "!isEditing" [(ngModel)]="user.userDOB" [monthNavigator]="true" [yearNavigator]="true"
+                  yearRange="1900:2018"></p-calendar>
+              <label for="float-input-dob">Date Of Birth</label>
+          </span>
+      </div>
+  </div>
+  <div class="row" style="padding-top:1.5em;">
+    <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
+        <span class="ui-float-label">
+            <input id="float-input-uName" [(disabled)] = "!isEditing" [(ngModel)]="user.userAddress" type="text" size="35" pKeyFilter="alphanum" pInputText>
+            <label for="float-input-uName">Address</label>
+        </span>
+    </div>
+</div>
+<div class="row" style="padding-top:1.5em;">
+    <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
+        <span class="ui-float-label">
+            <input id="float-input-uName" [(disabled)] = "!isEditing" [(ngModel)]="user.userCity" type="text" size="35" pKeyFilter="alphanum" pInputText>
+            <label for="float-input-uName">City</label>
+        </span>
+    </div>
+</div>
+<div class="row" style="padding-top:1.5em;">
+    <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
+        <span class="ui-float-label">
+            <input id="float-input-mob" required="true" minlength="5" maxlength="5" [(disabled)] = "!isEditing" [(ngModel)]="user.userPinCode" type="text"
+                size="35" pKeyFilter="pint" pInputText>
+            <label for="float-input-mob">Zip</label>
+        </span>
+    </div>
+</div>
+
+  <div *ngIf = "!isEditing" class="row" style="padding-top:1.5em;">
+      <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+          <button pButton type="button" (click)="editProfileFields()" label="Edit Profile">
+          </button>
+      </div>
+  </div>
+  <div *ngIf = "isSubmitVisible" class="row" style="padding-top:1.5em;">
+    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+        <button pButton type="button" (click)="profileValidation()" label="Submit">
+        </button>
+    </div>
+</div>
+</div>
+<p-dialog [(visible)]="display" [modal]=true [showHeader]="false">
+  {{userMessage}}
+</p-dialog>

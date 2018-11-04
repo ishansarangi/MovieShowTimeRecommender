@@ -1,0 +1,22 @@
+
+<div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                <p-menubar [model]="items">
+                    <div style="height:100%;padding-top: 0.25em;padding-left: 5em;">
+                        <input type="text" pInputText placeholder="Search Movies or Theatres">
+                        <button pButton label="LogIn" (click)="showDialog('login')" icon="fa fa-sign-out" style="margin-left:.25em;"></button>
+                        <button pButton label="SignUp" (click)="showDialog('signup')" icon="fa fa-sign-out" style="margin-left:.25em;"></button>
+                    </div>
+                </p-menubar>
+            </div>
+    
+        </div>
+    </div>
+    
+    <p-dialog header="LogIn" [(visible)]="displayLogin" [modal]=true [width]="350" [minWidth]="200" [minY]="70">
+        <app-signin></app-signin>
+    </p-dialog>
+    <p-dialog header="SignUp" [(visible)]="displaySignup" [modal]=true [width]="800" [minWidth]="200" [minY]="70">
+        <app-signup></app-signup>
+    </p-dialog>
