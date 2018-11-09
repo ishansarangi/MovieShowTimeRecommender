@@ -14,10 +14,12 @@ export class MovieDetailsComponent implements OnInit {
 
   movies: MoviesDetails[];
   trailersObj:any;
+  trailer:String;
   displayTrailer:boolean;
   constructor(private sanitizer:DomSanitizer,private getMovies: GetMoviesService, private getTrailers: FetchtrailersService,
     private router: Router, private cookieService: CookieService) {
     console.log("movieName");
+    this.displayTrailer = false;
     this.getMovies.fetchMovies()
       .subscribe(
         r => {
@@ -52,10 +54,10 @@ export class MovieDetailsComponent implements OnInit {
     this.router.navigateByUrl('/home/showtimes');
   }
   showTrailer(url){
-    console.log("TrailrId: "+url);
-    this.cookieService.set("trailerUrl", url);
-    console.log("trailerCookieUrl", this.cookieService.get("trailerUrl"));
+    console.log("Button Clieck" + url);
+    this.trailer = url;
     this.displayTrailer = true;
+    console.log("Done Trailers");
   }
   onStateChange(event) {
     console.log('player state', event.data);

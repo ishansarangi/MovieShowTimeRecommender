@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {LoginService} from '../login.service';
-import {Router} from '@angular/router';
-import { CookieService } from 'ngx-cookie-service';
+import {Router, ActivatedRoute} from '@angular/router';
+import { AuthenticationService } from '../_services';
 
 @Component({
   selector: 'app-signin',
@@ -13,10 +13,17 @@ export class SigninComponent implements OnInit {
   userPassword: string;
   errorMessage: string;
   hasError: boolean;
+  loading = false;
+  returnUrl: string;
 
-  constructor(private api: LoginService, private router: Router, private cookieService:CookieService) { }
+  constructor(private api: LoginService, private router: Router, private route: ActivatedRoute, private authenticationService: AuthenticationService) { }
 
   ngOnInit() {
+        // reset login status
+        this.authenticationService.logout();
+
+        // get return url from route parameters or default to '/'
+        this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
   }
 
   performLogin(){
@@ -25,29 +32,26 @@ export class SigninComponent implements OnInit {
     this.validateUserName();
     this.validatePassword();
     if (!this.hasError){
-      this.api.login(
+      this.loading = true;
+      this.authenticationService.login(
         this.username,
         this.userPassword
       )
         .subscribe(
           r => {
             console.log(r)
-            if (r.success) {
-              console.log(r)
-              localStorage.setItem('currentUser', this.username);
-              console.log(localStorage.getItem('currentUser'));
-              //store MYSESSIONID
-              localStorage.setItem('MYSESSIONID', this.cookieService.get("MYSESSIONID"));
-              console.log('Mysess'+ localStorage.getItem('MYSESSIONID'));
-              
-              this.router.navigateByUrl('/home/movies');
+            if (r.status == 200) {
+              // this.router.navigateByUrl('/home/movies');
+              this.router.navigate([this.returnUrl]);
             } else {
-              alert(r.errorReason);
+              alert(console.error());
+              this.loading = false;
             }
           },
           r => {
             console.log(r)
-            alert(r.error.error);
+            alert(r.errorMessage);
+            this.loading = false;
           }
         );
       
@@ -69,4 +73,5 @@ export class SigninComponent implements OnInit {
       alert(this.errorMessage);
     }
   }
+
 }

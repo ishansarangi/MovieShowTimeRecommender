@@ -20,7 +20,7 @@ import { CalendarModule } from 'primeng/calendar';
 import { KeyFilterModule } from 'primeng/keyfilter';
 import { HomeNavigationComponent } from './home-navigation/home-navigation.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CardModule } from 'primeng/card';
 import { CarouselModule } from 'primeng/carousel';
 import { ShowtimesComponent } from './showtimes/showtimes.component';
@@ -30,18 +30,32 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FlashMessagesModule } from 'angular2-flash-messages';
 import { TrailerComponent } from './trailer/trailer.component';
 import { YoutubePlayerModule } from 'ngx-youtube-player';
+import { routing, AppRouting } from './app.routing';
+import { AlertComponent } from './_directives';
+import { AuthGuard } from './_guards';
+import { AlertService, AuthenticationService, UserService } from './_services';
+import { JwtInterceptor, ErrorInterceptor } from './_helpers';
+
+
 const routes: Routes = [
-  { path: '', component: LoginComponent },
+  { path: '', component: LoginComponent},
   {
     path: '', children: [
       {
         path: 'home', component: HomeComponent, children: [
           { path: 'movies', component: MovieDetailsComponent },
-          { path: 'showtimes', component: ShowtimesComponent }
+          { path: 'showtimes', component: ShowtimesComponent, canActivate: [AuthGuard] }
         ]
+      }, 
+      {
+        path: 'login', component: LoginComponent
       }
     ]
-  }
+  },
+
+      // otherwise redirect to home
+      { path: '**', redirectTo: '' }
+
 
 ];
 
@@ -57,7 +71,8 @@ const routes: Routes = [
     HomeNavigationComponent,
     UserProfileComponent,
     ShowtimesComponent,
-    TrailerComponent
+    TrailerComponent,
+    AlertComponent
   ],
   imports: [
      BrowserModule,
@@ -76,10 +91,20 @@ const routes: Routes = [
      CardModule,
      CarouselModule,
      NgbModule,
+    //  routing,
+    //  AppRouting,
      FlashMessagesModule.forRoot(),
      RouterModule.forRoot(routes,{onSameUrlNavigation: 'reload'}) 
   ],
-  providers: [CookieService],
+  providers: [
+    CookieService,
+    AuthGuard,
+    AlertService,
+    AuthenticationService,
+    UserService,
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

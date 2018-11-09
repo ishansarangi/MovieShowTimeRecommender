@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from '../model/user';
 import { RegisterUserService } from '../services/register-user.service';
 import { Router } from '@angular/router';
 import { FlashMessagesService } from 'angular2-flash-messages'
 import { CustomValidator } from '../_validation';
 import { CookieService } from 'ngx-cookie-service';
+import { User } from '../_models';
 
 @Component({
-selector: 'app-signup',
-templateUrl: './signup.component.html',
-styleUrls: ['./signup.component.css']
+  selector: 'app-signup',
+  templateUrl: './signup.component.html',
+  styleUrls: ['./signup.component.css']
 })
 export class SignupComponent implements OnInit {
   user: User = new User();
@@ -20,7 +20,6 @@ export class SignupComponent implements OnInit {
   constructor(private api: RegisterUserService, private router:Router, private flashMessage:FlashMessagesService, private cookieService:CookieService) { }
 
   onRegisterSubmit(){
-   // 
       console.log(this.user);
       if(this.user.firstName == undefined || this.user.lastName == undefined || this.user.userAddress == undefined ||
           this.user.userCity == undefined || this.user.userContactNo == undefined || this.user.userDOB == undefined ||
