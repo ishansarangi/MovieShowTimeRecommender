@@ -1,16 +1,14 @@
-
 <div class="container-fluid">
-        <div class="row">
-            <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                <p-menubar [model]="items">
-                    <div style="height:100%;padding-top: 0.25em;padding-left: 5em;">
+    <div class="row">
+        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+            <p-menubar [model]="items">
+                <div style="height:100%;padding-top: 0.25em;padding-left: 5em;">
                         <input type="text" pInputText placeholder="Search Movies or Theatres">
                         <button pButton label="LogIn" (click)="showDialog('login')" icon="fa fa-sign-out" style="margin-left:.25em;"></button>
                         <button pButton label="SignUp" (click)="showDialog('signup')" icon="fa fa-sign-out" style="margin-left:.25em;"></button>
                     </div>
                 </p-menubar>
             </div>
-    
         </div>
     </div>
     

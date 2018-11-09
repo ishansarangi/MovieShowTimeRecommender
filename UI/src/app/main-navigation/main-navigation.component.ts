@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MenuItem } from 'primeng/api';
+import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-main-navigation',
   templateUrl: './main-navigation.component.html',
@@ -22,7 +23,13 @@ export class MainNavigationComponent implements OnInit {
       } 
     }
 
-  constructor() { }
+  constructor(private route: ActivatedRoute) {
+    this.route.queryParams.subscribe(params => {
+        if (params['openLogin'] == "true"){
+          this.showDialog('login')
+        }
+    });
+}
 
   ngOnInit() {
     this.items = [
