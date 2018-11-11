@@ -3,6 +3,7 @@ import { ShowtimesService } from '../services/showtimes.service'
 import { CookieService } from 'ngx-cookie-service';
 import { ThetreDetails } from './theatres';
 import { Showtimes } from "./showtimes"
+import { Date } from "./date"
 import { analyzeAndValidateNgModules } from '@angular/compiler';
 @Component({
   selector: 'app-showtimes',
@@ -18,12 +19,13 @@ export class ShowtimesComponent implements OnInit {
   trailer: String;
   movieStyle = {
 
-    'width': '60%',
+    'width': '100%',
     'height': '100%',
     'padding': '0px'
   }
   theatreList: Array<ThetreDetails>;
   finalTheatreList: Array<ThetreDetails> = [];
+  dates = new Map();
   index:number;
   constructor(private fetchShows: ShowtimesService,private cookieService:CookieService) {
     this.movieName = this.cookieService.get("movieName");
@@ -44,7 +46,7 @@ export class ShowtimesComponent implements OnInit {
             if(this.theatreList[this.index].movieList != null){
               for(var i=0;i<this.theatreList[this.index].movieList.length;i++){
                 this.theatreList[this.index].movieList[i].date = this.theatreList[this.index].movieList[i].start_at.substr(0,10);
-                this.theatreList[this.index].movieList[i].time = this.theatreList[this.index].movieList[i].start_at.substr(21,25);
+                this.theatreList[this.index].movieList[i].time = this.theatreList[this.index].movieList[i].start_at.substr(11,13);
               }
               this.finalTheatreList.push(this.theatreList[this.index]);
              
@@ -71,8 +73,20 @@ export class ShowtimesComponent implements OnInit {
     }
     return style;
   }
+  setMyStyleTrailer(){
+    let style={
+      'background-image': this.moviePoster,
+      'background-repeat': 'no-repeat',
+      'background-size': '100em 50em',
+      'padding': '0',
+      'width':'50em',
+      'height':'30em',
+      'border-radius':'5px'
+    }
+    return style;
+  }
   bookPage(link){
-
+    window.open(link);
   }
   showTrailer(){
     this.displayTrailer = true;
