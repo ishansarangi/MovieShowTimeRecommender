@@ -25,14 +25,14 @@ export class MovieDetailsComponent implements OnInit {
         r => {
           this.movies = r["results"];
           console.log(this.movies);
-          for(var i =0;i<this.movies.length;i++){
+          /*for(var i =0;i<this.movies.length;i++){
             if(this.movies[i].site!=null){
               this.movies[i].trailerId = this.movies[i].site.substr(0,24) + "embed/" + this.movies[i].site.substr(32);
               console.log(this.movies[i].trailerId);
               
             }
             
-          }
+          }*/
         }
       )
   }
@@ -46,19 +46,15 @@ export class MovieDetailsComponent implements OnInit {
     console.log("CLose");
     this.displayTrailer = false;
   }
-  routeMovie(movieName, poster,movieDesc) {
+  routeMovie(movieName, poster,movieDesc,movieId) {
     this.cookieService.set("moviePoster", poster);
     this.cookieService.set("movieName", movieName);
     this.cookieService.set("movieDesc", movieDesc);
+    this.cookieService.set("movieId", movieId);
     console.log("From Cookies- " + this.cookieService.get('movieName'));
     this.router.navigateByUrl('/home/showtimes');
   }
-  showTrailer(url){
-    console.log("Button Clieck" + url);
-    this.trailer = url;
-    this.displayTrailer = true;
-    console.log("Done Trailers");
-  }
+  
   onStateChange(event) {
     console.log('player state', event.data);
   }
