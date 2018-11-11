@@ -13,47 +13,47 @@ import { analyzeAndValidateNgModules } from '@angular/compiler';
 export class ShowtimesComponent implements OnInit {
   moviePoster: String;
   movieName: String;
-  movieDesc:  String;
+  movieDesc: String;
   movieId: String;
   displayTrailer: boolean;
   trailer: String;
   movieStyle = {
 
-    'width': '100%',
+    'width': '80%',
     'height': '100%',
     'padding': '0px'
   }
   theatreList: Array<ThetreDetails>;
   finalTheatreList: Array<ThetreDetails> = [];
   dates = new Map();
-  index:number;
-  constructor(private fetchShows: ShowtimesService,private cookieService:CookieService) {
+  index: number;
+  constructor(private fetchShows: ShowtimesService, private cookieService: CookieService) {
     this.movieName = this.cookieService.get("movieName");
     this.moviePoster = this.cookieService.get("moviePoster");
     this.movieId = this.cookieService.get("movieId");
     this.movieDesc = this.cookieService.get("movieDesc");
-    this.moviePoster  = "url(" + this.moviePoster  + ")";
+    this.moviePoster = "url(" + this.moviePoster + ")";
 
-    console.log("movie from cookies- " + this.movieName );
-        this.fetchShows.fetchShowtimes(this.movieName,this.movieId)
+    console.log("movie from cookies- " + this.movieName);
+    this.fetchShows.fetchShowtimes(this.movieName, this.movieId)
       .subscribe(
         r => {
           console.log(r);
           console.log(r['cinemas']);
           this.theatreList = r['cinemas'];
-          this.trailer = r['site'].substr(0,24) + "embed/" + r['site'].substr(32);
-          for(this.index=0;this.index<this.theatreList.length;this.index++){
-            if(this.theatreList[this.index].movieList != null){
-              for(var i=0;i<this.theatreList[this.index].movieList.length;i++){
-                this.theatreList[this.index].movieList[i].date = this.theatreList[this.index].movieList[i].start_at.substr(0,10);
-                this.theatreList[this.index].movieList[i].time = this.theatreList[this.index].movieList[i].start_at.substr(11,13);
+          this.trailer = r['site'].substr(0, 24) + "embed/" + r['site'].substr(32);
+          for (this.index = 0; this.index < this.theatreList.length; this.index++) {
+            if (this.theatreList[this.index].movieList != null) {
+              for (var i = 0; i < this.theatreList[this.index].movieList.length; i++) {
+                this.theatreList[this.index].movieList[i].date = this.theatreList[this.index].movieList[i].start_at.substr(0, 10);
+                this.theatreList[this.index].movieList[i].time = this.theatreList[this.index].movieList[i].start_at.substr(11, 13);
               }
               this.finalTheatreList.push(this.theatreList[this.index]);
-             
-            }else{
-              this.theatreList.splice(this.index,1);
+
+            } else {
+              this.theatreList.splice(this.index, 1);
             }
-              
+
           }
         }
       )
@@ -61,34 +61,45 @@ export class ShowtimesComponent implements OnInit {
 
   ngOnInit() {
   }
-  setMyStyle(){
-    let style={
+  setMyStyle() {
+    let style = {
       'background-image': this.moviePoster,
       'background-repeat': 'no-repeat',
       'background-size': '8em 12em',
       'padding': '0',
-      'width':'50em',
-      'height':'12em',
-      'border-radius':'5px'
+      'width': '50em',
+      'height': '12em',
+      'border-radius': '5px'
     }
     return style;
   }
-  setMyStyleTrailer(){
-    let style={
+  setMyStylePlay() {
+    let style = {
+      'margin-top': '17.5em',
+      'margin-left': '40em',
+      'background': 'transparent',
+      'border': 'none',
+      'width': '10em',
+      'height':'10em'
+    }
+    return style;
+  }
+  setMyStyleTrailer() {
+    let style = {
       'background-image': this.moviePoster,
       'background-repeat': 'no-repeat',
-      'background-size': '100em 50em',
+      'background-size': '75em 50em',
       'padding': '0',
-      'width':'50em',
-      'height':'30em',
-      'border-radius':'5px'
+      'width': '50em',
+      'height': '30em',
+      'border-radius': '5px'
     }
     return style;
   }
-  bookPage(link){
+  bookPage(link) {
     window.open(link);
   }
-  showTrailer(){
+  showTrailer() {
     this.displayTrailer = true;
     console.log("Done Trailers");
   }

@@ -1,7 +1,7 @@
 <div class="container-fluid" [ngStyle]="movieStyle">
   <div class="row" style="height: 30em;">
     <div class="col-md-12" [ngStyle]="setMyStyleTrailer()">
-      <button pButton type="button" class="fa fa-play" (click)="showTrailer()"></button>
+      <button pButton [ngStyle]="setMyStylePlay()" type="button" icon="fa fa-play-circle" (click)="showTrailer()"></button>
     </div>
   </div>
 
@@ -53,7 +53,7 @@
 
 
 </div>
-<p-dialog [(visible)]="displayTrailer" [dismissableMask]="true" [blockScroll]="true" [showHeader]="false" [minWidth]="200"
+<p-dialog [(visible)]="displayTrailer" [dismissableMask]="true" [blockScroll]="true" [showHeader]="true" [minWidth]="200"
   [minY]="0">
   <app-trailer *ngIf="displayTrailer" [trailerUrl]='trailer'></app-trailer>
 </p-dialog>

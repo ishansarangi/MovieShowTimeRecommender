@@ -29,3 +29,6 @@ padding-bottom: 0.2em;
    height: 100px;
    width: 900px;
 }
+:host >>> .ui-button .ui-button-icon{
+    height: 3em;
+}
