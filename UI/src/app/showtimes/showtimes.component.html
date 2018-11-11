@@ -41,7 +41,7 @@
           </div>
         </div>
         <div class="row" style="padding-top: 2em">
-          <div class="col-md-3" style="padding: 2em" *ngFor="let show of theatre.movieList">
+          <div class="col-md-2" style="padding: 2em" *ngFor="let show of theatre.movieList">
 
             <button pButton type="button" (click)="bookPage(show.booking_link)" label="{{show.date}} {{show.time}}"></button>
           </div>

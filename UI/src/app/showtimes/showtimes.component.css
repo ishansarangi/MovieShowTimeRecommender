@@ -8,9 +8,6 @@ padding-bottom: 0.2em;
 :host >>>  .ui-corner-all{
     border-radius:10px;
 }
-.poster{
-   
-}
 :host >>>  .ui-card-content{
     margin-bottom: 0em;
 }
@@ -31,4 +28,7 @@ padding-bottom: 0.2em;
 }
 :host >>> .ui-button .ui-button-icon{
     height: 3em;
+}
+:host >>> .ui-card{
+background-color: none;
 }

@@ -45,8 +45,11 @@ export class ShowtimesComponent implements OnInit {
           for (this.index = 0; this.index < this.theatreList.length; this.index++) {
             if (this.theatreList[this.index].movieList != null) {
               for (var i = 0; i < this.theatreList[this.index].movieList.length; i++) {
-                this.theatreList[this.index].movieList[i].date = this.theatreList[this.index].movieList[i].start_at.substr(0, 10);
-                this.theatreList[this.index].movieList[i].time = this.theatreList[this.index].movieList[i].start_at.substr(11, 13);
+                this.theatreList[this.index].movieList[i].date = this.theatreList[this.index].movieList[i].start_at.substr(5, 2)
+                 + "/" + this.theatreList[this.index].movieList[i].start_at.substr(8, 2);
+                console.log("Before" + this.theatreList[this.index].movieList[i].start_at);
+                this.theatreList[this.index].movieList[i].time = this.theatreList[this.index].movieList[i].start_at.substr(11, 5);
+                console.log("After" + this.theatreList[this.index].movieList[i].time );
               }
               this.finalTheatreList.push(this.theatreList[this.index]);
 
