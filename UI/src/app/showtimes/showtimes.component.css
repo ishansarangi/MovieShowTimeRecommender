@@ -22,3 +22,10 @@ padding-bottom: 0.2em;
     border-radius:10px;
     background-color: #323232;
 }
+:host >>> .ui-dialog .ui-dialog-content{
+    padding: 0;
+}
+:host >>> .ui-dialog {
+   height: 100px;
+   width: 900px;
+}
