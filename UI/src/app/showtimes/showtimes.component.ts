@@ -37,7 +37,7 @@ export class ShowtimesComponent implements OnInit {
       .subscribe(
         r => {
           console.log(r);
-          console.log(r['cinemas']);
+          console.log("Cinemas: " + r['dateList']);
           this.theatreList = r['cinemas'];
           this.trailer = r['site'].substr(0,24) + "embed/" + r['site'].substr(32);
           for(this.index=0;this.index<this.theatreList.length;this.index++){
