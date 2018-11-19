@@ -13,6 +13,9 @@ export class ShowtimesComponent implements OnInit {
   moviePoster: String;
   movieName: String;
   movieDesc:  String;
+  movieId: String;
+  displayTrailer: boolean;
+  trailer: String;
   movieStyle = {
 
     'width': '60%',
@@ -25,16 +28,18 @@ export class ShowtimesComponent implements OnInit {
   constructor(private fetchShows: ShowtimesService,private cookieService:CookieService) {
     this.movieName = this.cookieService.get("movieName");
     this.moviePoster = this.cookieService.get("moviePoster");
+    this.movieId = this.cookieService.get("movieId");
     this.movieDesc = this.cookieService.get("movieDesc");
     this.moviePoster  = "url(" + this.moviePoster  + ")";
 
     console.log("movie from cookies- " + this.movieName );
-        this.fetchShows.fetchShowtimes(this.movieName)
+        this.fetchShows.fetchShowtimes(this.movieName,this.movieId)
       .subscribe(
         r => {
-          console.log(r['cinemas']);
+          console.log(r);
+          console.log("Cinemas: " + r['dateList']);
           this.theatreList = r['cinemas'];
-          
+          this.trailer = r['site'].substr(0,24) + "embed/" + r['site'].substr(32);
           for(this.index=0;this.index<this.theatreList.length;this.index++){
             if(this.theatreList[this.index].movieList != null){
               for(var i=0;i<this.theatreList[this.index].movieList.length;i++){
@@ -53,8 +58,6 @@ export class ShowtimesComponent implements OnInit {
   }
 
   ngOnInit() {
-    //this.moviePoster = "http://image.tmdb.org/t/p/w154/bURIWlkMbzT8RdpemzCmQECo2Uh.jpg";
-    //this.movieName = "Venom";
   }
   setMyStyle(){
     let style={
@@ -70,6 +73,10 @@ export class ShowtimesComponent implements OnInit {
   }
   bookPage(link){
 
+  }
+  showTrailer(){
+    this.displayTrailer = true;
+    console.log("Done Trailers");
   }
 
 }

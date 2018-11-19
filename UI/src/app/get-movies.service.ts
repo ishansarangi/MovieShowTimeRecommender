@@ -8,7 +8,7 @@ import { environment } from 'src/environments/environment.prod';
 })
 export class GetMoviesService {
 
-  endPoint = environment.baseUrl + 'api/getMovies';
+  endPoint = environment.baseUrl + 'api/getMovies?type=nowPlaying';
   httpOptions = {
     headers: new HttpHeaders({ 'Authorization': 'Basic bW92aWVyZWNvbW1lbmRlcjpzM2N1ciFU' })
   };
@@ -16,6 +16,6 @@ export class GetMoviesService {
   constructor(private http: HttpClient) { }
 
   fetchMovies(){
-    return this.http.get(this.endPoint,this.httpOptions);
+    return this.http.post(this.endPoint,this.httpOptions);
   }
 }

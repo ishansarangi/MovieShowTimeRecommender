@@ -9,7 +9,7 @@
                     <div class="ui-grid ui-grid-responsive">
                         <div class="ui-grid-row">
                             <div class="ui-grid-col-12">
-                                <img src={{movie.poster_path}} (click)='routeMovie(movie.title,movie.poster_path,movie.overview)'
+                                <img src={{movie.backdrop_path}} (click)='routeMovie(movie.title,movie.poster_path,movie.overview,movie.id)'
                                     width=100%>
                             </div>
                         </div>
@@ -62,7 +62,4 @@
     </div>
 </div>
 
-<p-dialog  [(visible)]="displayTrailer" header="Movie Trailer" [width]="700" [height]="700" [minWidth]="200" [minY]="70">
-    <app-trailer *ngIf="displayTrailer" [trailerUrl]='trailer'></app-trailer>
-</p-dialog>
 
