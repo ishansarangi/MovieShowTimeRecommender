@@ -1,12 +1,11 @@
 <div class="container-fluid" [ngStyle]="movieStyle">
   <div class="row" style="height: 3em;">
-    <div class="col-md-12">
-        <img src={{this.moviePoster}} (click)='showTrailer()'
-        width=100%>
+    <div class="col-md-12" [ngStyle]="setMyStyleTrailer()">
+      <button pButton type="button" icon="fa fa-play-circle fa-5x" (click)="showTrailer()"></button>
     </div>
   </div>
 
-  <div class="row">
+  <div class="row" style="padding-top: 21em;">
     <p-card>
       <div class="container-fluid" style="width:100%">
         <div class="row">

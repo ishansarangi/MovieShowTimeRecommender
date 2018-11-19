@@ -8,8 +8,13 @@ padding-bottom: 0.2em;
 :host >>>  .ui-corner-all{
     border-radius:10px;
 }
-.poster{
-   
+:host >>> button{
+    background-color: transparent;
+    border: none;
+    margin-left: 50em;
+    margin-top: 15em;
+    height: 5em;
+    width: 5em;
 }
 :host >>>  .ui-card-content{
     margin-bottom: 0em;
@@ -29,3 +34,17 @@ padding-bottom: 0.2em;
    height: 100px;
    width: 900px;
 }
+:host >>> .ui-button .ui-button-icon-only{
+    width: 100%;
+    height: 100%;
+}
+:host >>> .ui-button:enabled:hover {
+    background-color: transparent;
+    border-color:transparent; }
+    :host >>> .ui-button:enabled:focus {
+        outline: 0 none;
+        outline-offset: 0px;
+        background-color: transparent; }
+        :host >>> .ui-button:enabled:active {
+        background-color: transparent;
+        border-color: transparent}

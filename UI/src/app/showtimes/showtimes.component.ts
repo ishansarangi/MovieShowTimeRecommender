@@ -18,7 +18,7 @@ export class ShowtimesComponent implements OnInit {
   trailer: String;
   movieStyle = {
 
-    'width': '60%',
+    'width': '100%',
     'height': '100%',
     'padding': '0px'
   }
@@ -68,11 +68,23 @@ export class ShowtimesComponent implements OnInit {
       'width':'50em',
       'height':'12em',
       'border-radius':'5px'
+   }
+   return style;
+ }
+  setMyStyleTrailer(){
+    let style={
+      'background-image': this.moviePoster,
+      'background-repeat': 'no-repeat',
+      'background-size': '100% 25em',
+      'padding': '0',
+      'width':'100%',
+      'height':'30em',
+      'border-radius':'5px'
     }
     return style;
   }
   bookPage(link){
-
+    window.open(link);
   }
   showTrailer(){
     this.displayTrailer = true;
