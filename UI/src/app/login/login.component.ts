@@ -9,12 +9,14 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
 
   constructor(private router: Router){
-    let currentUser = localStorage.getItem('currentUser');
-    if (currentUser) {
+    let currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    if (currentUser && currentUser.token) {
+      if (currentUser) {
         console.log(currentUser)
-        this.router.navigateByUrl('/');
+        this.router.navigateByUrl('/home');
       }
     }
+  }
 
   ngOnInit() {
   }
