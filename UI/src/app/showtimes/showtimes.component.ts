@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ShowtimesService } from '../services/showtimes.service'
-import { RecommendationService } from '../services/recommendation.service'
+import { ShowtimesService } from '../services/showtimes.service';
+import { RecommendationService } from '../services/recommendation.service';
+import { RatingsService } from '../services/ratings.service';
 import { CookieService } from 'ngx-cookie-service';
 import { ThetreDetails } from './theatres';
-import { Showtimes } from "./showtimes"
+import { Showtimes } from "./showtimes";
 import { analyzeAndValidateNgModules } from '@angular/compiler';
 import { Router } from '@angular/router';
 import { MoviesDetails } from "../movie-details/movie";
@@ -29,7 +30,8 @@ export class ShowtimesComponent implements OnInit {
   theatreList: Array<ThetreDetails>;
   finalTheatreList: Array<ThetreDetails> = [];
   index:number;
-  constructor(private router: Router,private fetchShows: ShowtimesService,private recommend: RecommendationService,private cookieService:CookieService) {
+  constructor(private router: Router,private fetchShows: ShowtimesService,private recommend: RecommendationService,
+    private cookieService:CookieService, private rating: RatingsService) {
     this.movieName = this.cookieService.get("movieName");
     this.moviePoster = this.cookieService.get("moviePoster");
     this.movieId = this.cookieService.get("movieId");
@@ -70,7 +72,7 @@ export class ShowtimesComponent implements OnInit {
           this.movies = r["results"];
           console.log(this.movies);
         }
-      )
+      );
   }
 
   ngOnInit() {
@@ -113,6 +115,14 @@ export class ShowtimesComponent implements OnInit {
     this.cookieService.set("movieId", movieId);
     console.log("From Cookies- " + this.cookieService.get('movieName'));
     this.router.navigateByUrl('/home/showtimes');
+  }
+  storeRatings(){
+    this.rating.storeRating(localStorage.getItem('currentUser'), this.movieId,this.rating,this.movieName)
+    .subscribe(
+      r =>{
+        console.log(r);
+      }
+    );
   }
 
 }

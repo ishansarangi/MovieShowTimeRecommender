@@ -18,6 +18,10 @@
                 </h2>
 
               </div>
+              <div class="col-md-3">
+                <p-rating [(ngModel)]="ratings" [cancel]="false" (onRate)="storeRatings()"></p-rating>
+              </div>
+              
 
             </div>
             <div class="row">
