@@ -1,4 +1,4 @@
-version: "3"
+version: "2"
 services: 
   session:
     image: redis
@@ -6,25 +6,29 @@ services:
     ports:
       - "6379:6379"
     network_mode: host
-    
   db:
     image: bitnami/mongodb:latest
     hostname: mongodb
     ports:
       - "27017:27017"
     network_mode: host
-
-  web:
-    build: .
-    ports:
-      - "8081:8081"
-    network_mode: host
-  
   ui:
     build: 
-      context: movierec-ang/MovieRecommender
+      context: ./UI
       dockerfile: Dockerfile
     ports:
       - "4200:4200"
     network_mode: host
-
+  app:
+    restart: always
+    build: ./SERVER
+    working_dir: /app
+    volumes:
+      - ./SERVER:/app
+    expose:
+      - "8080"
+    command: mvn clean spring-boot:run
+    depends_on:
+      - session
+      - db
+    network_mode: host
