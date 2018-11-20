@@ -32,18 +32,38 @@
       </div>
     </p-card>
   </div>
-  <div class="row" *ngFor="let date of finalTheatreList">
-    <div class="col-md-12" style="padding-top:3em;">
-      <div class="container-fluid theatres">
-        <div class="row" style="padding-top: 2em">
-          <div class="ui-grid-col-12">
-            <h3 style="color:white;text-align: center;">{{date}}</h3>
+  <div class="row">
+    <div class="col-sm-2 col-md-2 col-lg-3 col-xl-3">
+
+    </div>
+    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+      <p-carousel numVisible="5" pageLinks="10" circular="true" firstVisible="1" headerText="Now Playing" [value]="movies">
+        <ng-template let-movie pTemplate="item">
+          <div class="ui-grid ui-grid-responsive">
+            <div class="ui-grid-row">
+              <div class="ui-grid-col-12">
+                <img src={{movie.backdrop_path}} (click)='routeMovie(movie.title,movie.backdrop_path,movie.overview,movie.id)'
+                  width=100%>
+              </div>
+            </div>
+
           </div>
-        </div>
-      </div>
+          <div class="ui-grid-row">
+            <div class="ui-grid-col-6">
+              <span id="movieTitle">
+                {{movie.title}}
+              </span>
+            </div>
+          </div>
+        </ng-template>
+      </p-carousel>
+    </div>
+    <div class="col-sm-2 col-md-2 col-lg-6 col-xl-6">
+
     </div>
   </div>
 </div>
-<p-dialog  [(visible)]="displayTrailer" [dismissableMask] = "true" [blockScroll] = "true" [showHeader]="false"  [minWidth]="200" [minY]="0">
-    <app-trailer *ngIf="displayTrailer" [trailerUrl]='trailer'></app-trailer>
+<p-dialog [(visible)]="displayTrailer" [dismissableMask]="true" [blockScroll]="true" [showHeader]="false" [minWidth]="200"
+  [minY]="0">
+  <app-trailer *ngIf="displayTrailer" [trailerUrl]='trailer'></app-trailer>
 </p-dialog>

@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ShowtimesService } from '../services/showtimes.service'
+import { RecommendationService } from '../services/recommendation.service'
 import { CookieService } from 'ngx-cookie-service';
 import { ThetreDetails } from './theatres';
 import { Showtimes } from "./showtimes"
 import { analyzeAndValidateNgModules } from '@angular/compiler';
+import { Router } from '@angular/router';
+import { MoviesDetails } from "../movie-details/movie";
 @Component({
   selector: 'app-showtimes',
   templateUrl: './showtimes.component.html',
@@ -16,6 +19,7 @@ export class ShowtimesComponent implements OnInit {
   movieId: String;
   displayTrailer: boolean;
   trailer: String;
+  movies: MoviesDetails[];
   movieStyle = {
 
     'width': '100%',
@@ -25,7 +29,7 @@ export class ShowtimesComponent implements OnInit {
   theatreList: Array<ThetreDetails>;
   finalTheatreList: Array<ThetreDetails> = [];
   index:number;
-  constructor(private fetchShows: ShowtimesService,private cookieService:CookieService) {
+  constructor(private router: Router,private fetchShows: ShowtimesService,private recommend: RecommendationService,private cookieService:CookieService) {
     this.movieName = this.cookieService.get("movieName");
     this.moviePoster = this.cookieService.get("moviePoster");
     this.movieId = this.cookieService.get("movieId");
@@ -57,6 +61,14 @@ export class ShowtimesComponent implements OnInit {
             }
               
           }*/
+        }
+      )
+      this.recommend.fetchRecommendations(this.movieId)
+      .subscribe(
+        r =>{
+          console.log(r);
+          this.movies = r["results"];
+          console.log(this.movies);
         }
       )
   }
@@ -93,6 +105,14 @@ export class ShowtimesComponent implements OnInit {
   showTrailer(){
     this.displayTrailer = true;
     console.log("Done Trailers");
+  }
+  routeMovie(movieName, poster,movieDesc,movieId) {
+    this.cookieService.set("moviePoster", poster);
+    this.cookieService.set("movieName", movieName);
+    this.cookieService.set("movieDesc", movieDesc);
+    this.cookieService.set("movieId", movieId);
+    console.log("From Cookies- " + this.cookieService.get('movieName'));
+    this.router.navigateByUrl('/home/showtimes');
   }
 
 }
