@@ -12,7 +12,7 @@ export class LoginComponent implements OnInit {
     let currentUser = localStorage.getItem('currentUser');
     if (currentUser) {
         console.log(currentUser)
-        this.router.navigateByUrl('/home');
+        this.router.navigateByUrl('/home/movies');
       }
     }
 

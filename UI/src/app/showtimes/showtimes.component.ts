@@ -37,8 +37,12 @@ export class ShowtimesComponent implements OnInit {
       .subscribe(
         r => {
           console.log(r);
-          console.log("Cinemas: " + r['dateList']);
-          this.theatreList = r['cinemas'];
+          this.finalTheatreList = r.showtimesByTheatreAndDate
+          for(var i=0;i<this.finalTheatreList.length;i++){
+            var inner = this.finalTheatreList[i]
+            console.log(Object.keys(inner)[0]);
+          }
+          /*this.theatreList = r['cinemas'];
           this.trailer = r['site'].substr(0,24) + "embed/" + r['site'].substr(32);
           for(this.index=0;this.index<this.theatreList.length;this.index++){
             if(this.theatreList[this.index].movieList != null){
@@ -52,7 +56,7 @@ export class ShowtimesComponent implements OnInit {
               this.theatreList.splice(this.index,1);
             }
               
-          }
+          }*/
         }
       )
   }

@@ -41,8 +41,8 @@ export class SigninComponent implements OnInit {
           r => {
             console.log(r)
             if (r.status == 200) {
-              // this.router.navigateByUrl('/home/movies');
-              this.router.navigate([this.returnUrl]);
+              this.router.navigateByUrl('/home/movies');
+              //this.router.navigate([this.returnUrl]);
             } else {
               alert(console.error());
               this.loading = false;
