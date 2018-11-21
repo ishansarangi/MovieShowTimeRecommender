@@ -32,8 +32,6 @@ public class EmailAndSMSAsyncService {
 	        String intermediate = sendSMS(user.getUserContactNo(),"You have successfully registered to Movierecommeder App");
 	    	//sendSMS(user.getUserContactNo(), "OTP-"+sendOtp(user.getUserName()).toString());
 	        String result = emailNotific.sendMail(user);
-	        
-	        
 	    } catch (Throwable t) {
 	        logger.debug(t.getMessage());
 	    }

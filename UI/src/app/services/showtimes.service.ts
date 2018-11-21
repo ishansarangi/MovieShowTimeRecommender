@@ -24,6 +24,5 @@ export class ShowtimesService {
     console.log("Fetch" + movieName);
     this.endPoint = this.endPoint.concat("?movieName=") + movieName + "&movieId=" + movieId;
     return this.http.post(this.endPoint,this.httpOptions);
-    return this.http.post(this.endPoint,this.httpOptions).pipe(map((response: any) => response.json()))
   }
 }
