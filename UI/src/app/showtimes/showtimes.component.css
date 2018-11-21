@@ -48,3 +48,38 @@ padding-bottom: 0.2em;
         :host >>> .ui-button:enabled:active {
         background-color: transparent;
         border-color: transparent}
+        .btn-circle {
+            width: 40px;
+            height: 40px;
+            margin-left: 0px;
+            margin-top: 5px;
+            border-radius: 20px;
+            text-align: center;
+            font-size: 12px;
+            line-height: 1.42857;
+            font-weight: bold;
+        }
+.showDates{
+    padding-left: 2em;
+}
+:host >>> .ui-button.ui-state-default.ui-button-info{
+    background-color: transparent;
+    color:#007ad9;
+}
+:host >>> .ui-button:enabled:active {
+color: white;
+}
+:host >>> .ui-button:enabled:focus {
+    color: white;
+}
+.theatres{
+    border: 2px;
+    border-radius:10px;
+    background-color: #323232;
+}
+.btn-links{
+    margin-top: 5px;
+    margin-left: 3em;
+    height: 3em;
+    width: 8em;
+}

@@ -22,9 +22,9 @@
             </div>
             <div class="row">
               <div class="col-md-12">
-                <h5>
+                <p>
                   {{movieDesc}}
-                </h5>
+                </p>
               </div>
             </div>
           </div>
@@ -32,18 +32,30 @@
       </div>
     </p-card>
   </div>
-  <div class="row" *ngFor="let date of finalTheatreList">
-    <div class="col-md-12" style="padding-top:3em;">
-      <div class="container-fluid theatres">
-        <div class="row" style="padding-top: 2em">
+  <div class="row">
+    <div class="showDates" *ngFor="let date of dates">
+      <button pButton type="button" [label]="date" (click)="filterDate(date)" class="ui-button-info btn-circle"></button>
+    </div>
+  </div>
+  <div class="row" *ngFor="let theatre of filteredShowtimes">
+    <div class="col-md-12" style="padding-top:2em;">
+      <div class="container-fluid">
+        <div class="row" style="padding-top: 1em">
           <div class="ui-grid-col-12">
-            <h3 style="color:white;text-align: center;">{{date}}</h3>
+            <h3 style="color:rgb(0, 0, 0);text-align: center;">{{theatre.cinemaName}}</h3>
+          </div>
+        </div>
+        <div class="row" style="display: flex;align-items: center;justify-content: center;">
+          <div *ngFor="let show of theatre.showDetails">
+            <button pButton type="button" class="ui-button-info btn-links" (click)="bookPage(show.bookingLink)" label="{{show.showTime}}"></button>
+
           </div>
         </div>
       </div>
     </div>
   </div>
 </div>
-<p-dialog  [(visible)]="displayTrailer" [dismissableMask] = "true" [blockScroll] = "true" [showHeader]="false"  [minWidth]="200" [minY]="0">
-    <app-trailer *ngIf="displayTrailer" [trailerUrl]='trailer'></app-trailer>
+<p-dialog [(visible)]="displayTrailer" [positionTop]="50" [dismissableMask]="true" [blockScroll]="true" [showHeader]="false" [minWidth]="200"
+  minY="-100">
+  <app-trailer *ngIf="displayTrailer" [trailerUrl]='trailer'></app-trailer>
 </p-dialog>

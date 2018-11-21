@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ShowtimesService } from '../services/showtimes.service'
 import { CookieService } from 'ngx-cookie-service';
 import { ThetreDetails } from './theatres';
-import { Showtimes } from "./showtimes"
+import { Shows } from "./shows"
 import { analyzeAndValidateNgModules } from '@angular/compiler';
 @Component({
   selector: 'app-showtimes',
@@ -22,9 +22,10 @@ export class ShowtimesComponent implements OnInit {
     'height': '100%',
     'padding': '0px'
   }
-  theatreList: Array<ThetreDetails>;
-  finalTheatreList: Array<ThetreDetails> = [];
-  index:number;
+  theatreList: Array<Shows>;
+  finalTheatreList: Array<Shows> = [];
+  filteredShowtimes: Array<ThetreDetails> = [];
+  dates: Array<String> = [];
   constructor(private fetchShows: ShowtimesService,private cookieService:CookieService) {
     this.movieName = this.cookieService.get("movieName");
     this.moviePoster = this.cookieService.get("moviePoster");
@@ -37,26 +38,23 @@ export class ShowtimesComponent implements OnInit {
       .subscribe(
         r => {
           console.log(r);
-          this.finalTheatreList = r.showtimesByTheatreAndDate
+          this.finalTheatreList = r;
+          this.trailer = r[0].trailerLink.substr(0,24) + "embed/" + r[0].trailerLink.substr(32);
+          //this.trailer = r[0]['trailerLink'].substr(0,24) + "embed/" + r['site'].substr(32);
           for(var i=0;i<this.finalTheatreList.length;i++){
-            var inner = this.finalTheatreList[i]
-            console.log(Object.keys(inner)[0]);
+           this.finalTheatreList[i].date = this.finalTheatreList[i].date.substr(8);
+           this.dates.push(this.finalTheatreList[i].date);
+           this.dates.sort();
+           console.log(this.finalTheatreList);
           }
-          /*this.theatreList = r['cinemas'];
-          this.trailer = r['site'].substr(0,24) + "embed/" + r['site'].substr(32);
-          for(this.index=0;this.index<this.theatreList.length;this.index++){
-            if(this.theatreList[this.index].movieList != null){
-              for(var i=0;i<this.theatreList[this.index].movieList.length;i++){
-                this.theatreList[this.index].movieList[i].date = this.theatreList[this.index].movieList[i].start_at.substr(0,10);
-                this.theatreList[this.index].movieList[i].time = this.theatreList[this.index].movieList[i].start_at.substr(21,25);
+          for(var i=0;i<this.finalTheatreList.length;i++){
+            for(var j=0;j<this.finalTheatreList[i].theatreShowDetails.length;j++){
+              for(var k=0;k<this.finalTheatreList[i].theatreShowDetails[j].showDetails.length;k++){
+                let newDate = this.dateConvert(this.finalTheatreList[i].theatreShowDetails[j].showDetails[k].showTime);
+                this.finalTheatreList[i].theatreShowDetails[j].showDetails[k].showTime = newDate;
               }
-              this.finalTheatreList.push(this.theatreList[this.index]);
-             
-            }else{
-              this.theatreList.splice(this.index,1);
             }
-              
-          }*/
+          }
         }
       )
   }
@@ -92,7 +90,27 @@ export class ShowtimesComponent implements OnInit {
   }
   showTrailer(){
     this.displayTrailer = true;
-    console.log("Done Trailers");
+  }
+  filterDate(date){
+    console.log(date);
+    this.filteredShowtimes = [];
+    for(var i=0;i<this.finalTheatreList.length;i++){
+      if(this.finalTheatreList[i].date == date){
+        this.filteredShowtimes = this.finalTheatreList[i].theatreShowDetails;
+        break;
+      }
+    }
+  }
+   dateConvert (time) {
+    // Check correct time format and split into components
+    time = time.match (/^([01]\d|2[0-3])(:)([0-5]\d)(:[0-5]\d)?$/) || [time];
+  
+    if (time.length > 1) { // If time format correct
+      time = time.slice (1);  // Remove full string match value
+      time[5] = +time[0] < 12 ? 'AM' : 'PM'; // Set AM/PM
+      time[0] = +time[0] % 12 || 12; // Adjust hours
+    }
+    return time.join (''); 
   }
 
 }
