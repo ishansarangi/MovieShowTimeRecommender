@@ -1,6 +1,7 @@
 import { Showtimes } from "./showtimes"
 
 export class ThetreDetails {
-    name:String;
-    movieList:Showtimes[]
+    cinemaName: String;
+    showDetails: Showtimes[];
+    trailerLink: String;
 }
