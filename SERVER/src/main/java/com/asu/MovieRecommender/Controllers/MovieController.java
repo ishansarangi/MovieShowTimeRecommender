@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.asu.MovieRecommender.MovieRecommenderApplication;
 import com.asu.MovieRecommender.Exceptions.MovieDetailsException;
+import com.asu.MovieRecommender.User.Response;
 import com.asu.MovieRecommender.UserService.UserLoginService;
 import com.asu.MovieRecommender.ws.themoviedb.CinemasList;
 import com.asu.MovieRecommender.ws.themoviedb.MoviesList;
@@ -64,8 +65,8 @@ public class MovieController {
 	
 	@PostMapping
 	@RequestMapping(value = "/api/getShowtimes", produces = "application/json")
-	public ResponseEntity<CinemasList> getMovieShowtime(@RequestParam("movieName") String movieName, @RequestParam("movieId") String movieId) {
-		ResponseEntity<CinemasList> listOfShowtimes = null;
+	public ResponseEntity<?> getMovieShowtime(@RequestParam("movieName") String movieName, @RequestParam("movieId") String movieId) {
+		ResponseEntity<?> listOfShowtimes = null;
 		try {
 			/*if(!userLoginService.isLoggedIn()) {
 				return new ResponseEntity<CinemasList>(
@@ -75,8 +76,8 @@ public class MovieController {
 			listOfShowtimes = theMovieDBService.getCinemasNew(movieName, movieId);
 		} catch (MovieDetailsException exception) {
 			logger.error(exception.getErrorMessage(), exception);
-			return new ResponseEntity<CinemasList>(
-					new CinemasList(HttpStatus.FORBIDDEN.toString(), false, exception.getErrorMessage()), HttpStatus.OK);
+			return new ResponseEntity<Response>(
+					new Response(HttpStatus.FORBIDDEN.toString(), false, exception.getErrorMessage()), HttpStatus.OK);
 		}
 		return listOfShowtimes;
 	}

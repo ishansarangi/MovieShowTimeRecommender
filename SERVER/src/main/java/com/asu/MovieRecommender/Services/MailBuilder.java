@@ -17,8 +17,9 @@ public class MailBuilder {
 	public String build(String firstName,String message) {
 		Context context = new Context();
 		context.setVariable("message", message);
-		context.setVariable("salutation", "Hi"+firstName);
-		context.setVariable("thankText", "Thanks \n"+"MovieRecommenderTeam");
+		context.setVariable("salutation", "Hi "+firstName+",");
+		context.setVariable("thankText", "Thanks");
+		context.setVariable("IssuerName","MovieRecommenderTeam");
 		return templateEngine.process("mailTemplate", context);
 	}
 

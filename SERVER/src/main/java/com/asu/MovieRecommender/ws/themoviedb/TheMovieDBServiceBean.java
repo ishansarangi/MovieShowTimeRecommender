@@ -7,6 +7,7 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.logging.log4j.LogManager;
@@ -27,6 +28,7 @@ import org.springframework.web.client.RestTemplate;
 
 import com.asu.MovieRecommender.Exceptions.MovieDetailsException;
 import com.asu.MovieRecommender.Services.CacheService;
+import com.asu.MovieRecommender.User.Response;
 import com.asu.MovieRecommender.UserService.UserLoginService;
 import com.asu.MovieRecommender.utility.ApiUrl;
 import com.asu.MovieRecommender.utility.Constants;
@@ -393,9 +395,10 @@ public class TheMovieDBServiceBean implements TheMovieDBService {
 	}
 	
 	@Override
-	public ResponseEntity<CinemasList> getCinemasNew(String movieName, String movieId) throws MovieDetailsException {
+	public ResponseEntity<?> getCinemasNew(String movieName, String movieId) throws MovieDetailsException {
 		String city = Constants.TEMPE;
 		CinemasList cinemaList = new CinemasList();
+		List<NowPlayingMovies> listNowPlaying = new ArrayList<>();
 		Map<String, Map<String, List<ShowDetails>>> showtimesByTheatreAndDate = new HashMap<>();
 		try {
 			putTheatreForCity(city);
@@ -450,9 +453,41 @@ public class TheMovieDBServiceBean implements TheMovieDBService {
 			throw new MovieDetailsException("Error while putting theatre names to the cache for city:" + city);
 		}
 		
-		cinemaList.setShowtimesByTheatreAndDate(showtimesByTheatreAndDate);
+//		cinemaList.setShowtimesByTheatreAndDate(showtimesByTheatreAndDate);
+		
+		NowPlayingMovies nowPlayingMovies =null;
+		Map<String,List<ShowDetails>> tempMap = null;
+		CinemaShowtimes cinemaShowtimes =null;
+		List<CinemaShowtimes> listCinemaShowTimes =null;
+		//String trailerlink =;
+		for(Entry<String,Map<String,List<ShowDetails>>> entry: showtimesByTheatreAndDate.entrySet())
+		{
+			nowPlayingMovies =null;
+			tempMap =null;
+			tempMap = entry.getValue();
+			if(null!=tempMap)
+			{
+				listCinemaShowTimes = new ArrayList<>();
+				for(Entry<String,List<ShowDetails>> entrySet: tempMap.entrySet())
+				{
+				  	cinemaShowtimes =null;
+				  	cinemaShowtimes = new CinemaShowtimes(entrySet.getKey(),entrySet.getValue());
+				  	listCinemaShowTimes.add(cinemaShowtimes);
+				}
+			}
+			
+			
+			try {
+				if(StringUtils.isNotBlank(getCachedTrailerUrl(movieId)))
+				nowPlayingMovies = new NowPlayingMovies(entry.getKey(),listCinemaShowTimes,getCachedTrailerUrl(movieId));
+			} catch (RestClientException | URISyntaxException e) {
+				throw new MovieDetailsException("Error while fetching trailer Url");
+				//return new ResponseEntity<Response>(new Response(String.valueOf(HttpStatus.BAD_REQUEST),false, e.getMessage()),HttpStatus.OK);
+			}
+			listNowPlaying.add(nowPlayingMovies);
+		}
 
-		return new ResponseEntity<CinemasList>(cinemaList, HttpStatus.OK);
+		return new ResponseEntity<List<NowPlayingMovies>>(listNowPlaying, HttpStatus.OK);
 	}
 
 	public void putTheatreForCity(String city) throws MovieDetailsException {
