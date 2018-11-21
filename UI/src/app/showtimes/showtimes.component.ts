@@ -16,6 +16,7 @@ import { User } from "../_models/user";
 })
 export class ShowtimesComponent implements OnInit {
   moviePoster: String;
+  backgroundPoster: String;
   movieName: String;
   movieDesc:  String;
   movieId: String;
@@ -37,10 +38,12 @@ export class ShowtimesComponent implements OnInit {
   dates: Array<String> = [];
   constructor(private rating:RatingsService, private recommend:RecommendationService,private router:Router,private fetchShows: ShowtimesService,private cookieService:CookieService) {
     this.movieName = this.cookieService.get("movieName");
+    this.backgroundPoster = this.cookieService.get("backgroundPoster");
     this.moviePoster = this.cookieService.get("moviePoster");
     this.movieId = this.cookieService.get("movieId");
     this.movieDesc = this.cookieService.get("movieDesc");
     this.moviePoster  = "url(" + this.moviePoster  + ")";
+    this.backgroundPoster  = "url(" + this.backgroundPoster  + ")";
 
     console.log("movie from cookies- " + this.movieName );
         this.fetchShows.fetchShowtimes(this.movieName,this.movieId)
@@ -84,23 +87,24 @@ export class ShowtimesComponent implements OnInit {
     let style={
       'background-image': this.moviePoster,
       'background-repeat': 'no-repeat',
-      'background-size': '8em 12em',
-      'padding': '0',
-      'width':'50em',
-      'height':'12em',
+      'background-size': '100% 100%',
+      'padding': '-10',
+      // 'width':'100%',
+      // 'height':'27em',
       'border-radius':'5px'
    }
    return style;
  }
   setMyStyleTrailer(){
     let style={
-      'background-image': this.moviePoster,
+      'background-image': this.backgroundPoster,
       'background-repeat': 'no-repeat',
-      'background-size': '100% 25em',
+      'background-size': '100% 110%',
+      'background-color': '#ffffff',
       'padding': '0',
       'width':'100%',
-      'height':'30em',
-      'border-radius':'5px'
+      'height':'1040%',
+      'overflow': 'hidden'
     }
     return style;
   }
@@ -131,7 +135,8 @@ export class ShowtimesComponent implements OnInit {
     }
     return time.join (''); 
   }
-  routeMovie(movieName, poster,movieDesc,movieId) {
+  routeMovie(movieName, backgroundPoster, poster,movieDesc,movieId) {
+    this.cookieService.set("backgroundPoster", backgroundPoster);
     this.cookieService.set("moviePoster", poster);
     this.cookieService.set("movieName", movieName);
     this.cookieService.set("movieDesc", movieDesc);

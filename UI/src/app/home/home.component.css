@@ -21,9 +21,9 @@
 .content{
     height: 100%;
     width: 100%;
-    /* background-image: url(http://bit.ly/2gPLxZ4); */
+    background-image: url(/src/assets/BackgroundImage.jpg); /*url(http://bit.ly/2gPLxZ4);*/
     background-repeat: no-repeat;
-    background-color: #191919;
+    /* background-color: #191919; */
     background-attachment: fixed;
     background-size: cover;
 }

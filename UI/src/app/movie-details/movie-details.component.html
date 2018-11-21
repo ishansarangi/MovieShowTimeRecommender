@@ -9,7 +9,7 @@
             <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
                 <ngb-carousel *ngIf="movies"style="outline:none;">
                 <ng-template ngbSlide *ngFor="let movie of movies">
-                    <img class="img-fluid mx-auto d-block" style="max-height:550px;" [src]="movie.backdrop_path" width="80%" (click)='routeMovie(movie.title,movie.poster_path,movie.overview,movie.id)'>
+                    <img class="img-fluid mx-auto d-block" style="max-height:550px;" [src]="movie.backdrop_path" width="80%" (click)='routeMovie(movie.title,movie.backdrop_path,movie.poster_path,movie.overview,movie.id)'>
                     <div class="carousel-caption">
                         <h3>{{movie.title}}</h3>
                         <!-- <p>{{slider.text}}</p> -->
@@ -60,7 +60,7 @@
                     <div class="ui-grid ui-grid-responsive">
                         <div class="ui-grid-row">
                             <div class="ui-grid-col-12">
-                                    <img src={{movie.poster_path}} (click)='routeMovie(movie.title,movie.poster_path,movie.overview,movie.id)'
+                                    <img src={{movie.poster_path}} (click)='routeMovie(movie.title,movie.backdrop_path,movie.poster_path,movie.overview,movie.id)'
                                     width=100%>
                             </div>
                         </div>

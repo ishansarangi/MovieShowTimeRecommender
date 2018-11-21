@@ -69,7 +69,8 @@ template: string = `<img class="custom-spinner-template" src="http://pa1.narvii.
 
   }
 
-  routeMovie(movieName, poster,movieDesc,movieId) {
+  routeMovie(movieName,backgroundPoster,poster,movieDesc,movieId) {
+    this.cookieService.set("backgroundPoster", backgroundPoster);
     this.cookieService.set("moviePoster", poster);
     this.cookieService.set("movieName", movieName);
     this.cookieService.set("movieDesc", movieDesc);
