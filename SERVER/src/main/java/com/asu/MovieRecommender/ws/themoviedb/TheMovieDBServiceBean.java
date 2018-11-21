@@ -28,6 +28,7 @@ import org.springframework.web.client.RestTemplate;
 
 import com.asu.MovieRecommender.Exceptions.MovieDetailsException;
 import com.asu.MovieRecommender.Services.CacheService;
+import com.asu.MovieRecommender.User.Response;
 import com.asu.MovieRecommender.UserService.UserLoginService;
 import com.asu.MovieRecommender.utility.ApiUrl;
 import com.asu.MovieRecommender.utility.Constants;
@@ -458,6 +459,7 @@ public class TheMovieDBServiceBean implements TheMovieDBService {
 		Map<String,List<ShowDetails>> tempMap = null;
 		CinemaShowtimes cinemaShowtimes =null;
 		List<CinemaShowtimes> listCinemaShowTimes =null;
+		//String trailerlink =;
 		for(Entry<String,Map<String,List<ShowDetails>>> entry: showtimesByTheatreAndDate.entrySet())
 		{
 			nowPlayingMovies =null;
@@ -475,7 +477,13 @@ public class TheMovieDBServiceBean implements TheMovieDBService {
 			}
 			
 			
-			nowPlayingMovies = new NowPlayingMovies(entry.getKey(),listCinemaShowTimes);
+			try {
+				if(StringUtils.isNotBlank(getCachedTrailerUrl(movieId)))
+				nowPlayingMovies = new NowPlayingMovies(entry.getKey(),listCinemaShowTimes,getCachedTrailerUrl(movieId));
+			} catch (RestClientException | URISyntaxException e) {
+				throw new MovieDetailsException("Error while fetching trailer Url");
+				//return new ResponseEntity<Response>(new Response(String.valueOf(HttpStatus.BAD_REQUEST),false, e.getMessage()),HttpStatus.OK);
+			}
 			listNowPlaying.add(nowPlayingMovies);
 		}
 
