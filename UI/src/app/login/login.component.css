@@ -1,5 +1,5 @@
 .mainNavBar{
-    background-color: #191919;
+    background-color: #000000;
     height: 100%;
     width: 100%;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -8,10 +8,12 @@
 }
 
 .titleSmall{
+    font-family: 'Rye', cursive;
     font-size: 0.7em;
     color:rgb(56, 145, 204);
 }
 #titleApp{
+    font-family: 'Rye', cursive;
     font-size: 2em; 
     color:rgb(56, 145, 204);
     padding-top: 0px;
@@ -19,12 +21,12 @@
 .content{
     height: 100%;
     width: 100%;
-    background-image: url("/src/assets/MovieBackground.jpg");
-    background-repeat: repeat;
-    background-size: contain;
-    background-position: center;
+   /* background-image: url(http://bit.ly/2gPLxZ4); */
+   background-repeat: no-repeat;
+   background-color: #191919;
+   background-attachment: fixed;
+   background-size: cover;
 }
-
 
 .footer{
     height: 100%;

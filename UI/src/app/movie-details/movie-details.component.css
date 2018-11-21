@@ -4,21 +4,19 @@
     align-self: center;
 }
 .ui-carousel-header{
-    background-color: beige;
+    background-color:#191919;
 }
 .ui-carousel-viewport{
-    background-color: beige;
+    background-color:#191919;
 }
 :host >>>  .ui-carousel .ui-carousel-viewport {
-    border: 1px solid #252424;
-    background-color: rgb(20, 19, 19);
+    background-color:#191919;
 }
 :host >>>  .ui-carousel .ui-carousel-viewport .ui-carousel-items .ui-carousel-item {
-    border: 0px solid #191919; 
     padding-left: 0.8em;
 }
 :host >>>  .ui-carousel .ui-carousel-header {
-    background-color: #191919;
+    background-color:#191919;
     text-align: center;
     height: 2.5em;
 }
@@ -26,4 +24,37 @@
     font-family: "source sans pro",Arial,sans-serif;
     font-size: 1.5em;
     padding-bottom: 0.3em;
+}
+
+.carousel-inner .item{
+    width: 80%; /* Any width you want */
+    height: 40%; /* Any width you want */
+  }
+.carousel-inner .item img{
+    min-width: 80%;
+    min-height: 10%;
+  }
+
+#title{
+    font-family: 'Rye', cursive;
+    align-self: center;
+    font-size: 2.5em;
+    color: #ffffff;
+    -webkit-text-fill-color: #ffffff;
+    /* padding-bottom: 0.3em; */
+}
+
+#title-small{
+    font-family: 'Voga', cursive;
+    align-self: left;
+    font-size: 1em;
+    color: #f7f2f2;
+    /* padding-bottom: 0.3em; */
+}
+
+:host ::ng-deep .custom-spinner-template {
+    height: 100% !important;
+    width: 100% !important;
+    top: 0% !important;
+    left: 0% !important;
 }

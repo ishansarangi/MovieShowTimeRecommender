@@ -1,10 +1,11 @@
 :host >>> .ui-menubar{
-    background-color: #191919;
+    background-color: #000000;
+    border-width: 0em;
 }
 :host >>> .ui-dialog .ui-dialog-content{
     background-color: #ffffff;
     border-radius: 5px;
-    border-color:  rgb(56, 145, 204);
+    /* border-color: #000000; */
 }
 :host >>> .ui-dialog .ui-dialog-titlebar{
     background-color: rgb(56, 145, 204);
