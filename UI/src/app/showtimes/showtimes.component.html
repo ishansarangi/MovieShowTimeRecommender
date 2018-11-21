@@ -1,6 +1,6 @@
 <div class="container-fluid" [ngStyle]="movieStyle">
   <div class="row" style="height: 3em;background-color: #191919;">
-    <div class="col-md-12" [ngStyle]="setMyStyleTrailer()">
+    <div class="col-md-12" [ngStyle]="setMyStyleTrailer()" (click)="showTrailer()">
       <button pButton type="button" icon="fa fa-play-circle fa-5x" (click)="showTrailer()" style="text-align: center;"></button>
     </div>
   </div>

@@ -23,6 +23,10 @@
     width: 100%;
     height: 100%;
 }
+:host >>> .ui-button:enabled:hover {
+    background-color: transparent;
+    border-color:transparent; 
+}
 
 :host >>> .ui-button:enabled:focus {
     outline: 0 none;
