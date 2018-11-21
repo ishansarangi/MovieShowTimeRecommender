@@ -7,15 +7,14 @@ import { environment } from 'src/environments/environment.prod';
 })
 export class RecommendationService {
 
-  endPoint = environment.baseUrl + 'api/getRecommendedMovies';
+  endPoint = environment.baseUrl + 'api/getRecommendedMovies?movieId=';
   httpOptions = {
     headers: new HttpHeaders({ 'Authorization': 'Basic bW92aWVyZWNvbW1lbmRlcjpzM2N1ciFU' })
   };
+  
   constructor(private http: HttpClient) { }
 
   fetchRecommendations(movieId){
-
-    this.endPoint = this.endPoint.concat("?movieId=") + movieId;
-    return this.http.post(this.endPoint,this.httpOptions);
+    return this.http.post(this.endPoint + movieId,this.httpOptions);
   }
 }

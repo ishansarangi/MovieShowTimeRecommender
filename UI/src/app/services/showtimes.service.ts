@@ -9,7 +9,7 @@ import { map } from "rxjs/operators";
 })
 export class ShowtimesService {
 
-  endPoint = environment.baseUrl + 'api/getShowtimes';
+  endPoint = environment.baseUrl + 'api/getShowtimes?movieName=';
   httpOptions = {
     headers: new HttpHeaders({ 'Authorization': 'Basic bW92aWVyZWNvbW1lbmRlcjpzM2N1ciFU' })
   };
@@ -17,12 +17,6 @@ export class ShowtimesService {
   constructor(private http: HttpClient) { }
 
   fetchShowtimes( movieName,movieId): Observable<any>{
-    console.log("Before Appending Movie Details to Showtime: " + this.endPoint);
-    if(this.endPoint.indexOf("?")>0)
-      this.endPoint = this.endPoint.substr(0,this.endPoint.indexOf("?"));
-    console.log("Before Appending Movie Details to Showtime: " + this.endPoint);
-    console.log("Fetch" + movieName);
-    this.endPoint = this.endPoint.concat("?movieName=") + movieName + "&movieId=" + movieId;
-    return this.http.post(this.endPoint,this.httpOptions);
+    return this.http.post(this.endPoint + movieName + "&movieId=" + movieId,this.httpOptions);
   }
 }
