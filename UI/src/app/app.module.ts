@@ -26,7 +26,7 @@ import { CarouselModule } from 'primeng/carousel';
 import { ShowtimesComponent } from './showtimes/showtimes.component';
 import { DataViewModule } from 'primeng/dataview';
 import { CookieService } from 'ngx-cookie-service';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule, NgbCarouselModule, NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
 import { FlashMessagesModule } from 'angular2-flash-messages';
 import { TrailerComponent } from './trailer/trailer.component';
 import { YoutubePlayerModule } from 'ngx-youtube-player';
@@ -36,28 +36,23 @@ import { AuthGuard } from './_guards';
 import { AlertService, AuthenticationService, UserService } from './_services';
 import { JwtInterceptor, ErrorInterceptor } from './_helpers';
 import { RatingModule } from 'primeng/rating';
+import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
 
-const routes: Routes = [
-  { path: '', component: LoginComponent},
-  {
-    path: '', children: [
-      {
-        path: 'home', component: HomeComponent, children: [
+const routes: Routes =  [
+  { path: '', component: LoginComponent },
+  { path: '', children: [
+      { path: 'home', component: HomeComponent, children: [
           { path: 'movies', component: MovieDetailsComponent },
           { path: 'showtimes', component: ShowtimesComponent, canActivate: [AuthGuard] }
         ]
-      }, 
-      {
-        path: 'login', component: LoginComponent
       }
     ]
   },
-
-      // otherwise redirect to home
-      { path: '**', redirectTo: '' }
-
-
+  { path: 'login', component: LoginComponent },
+  // otherwise redirect to home
+  { path: '**', redirectTo: ''  }
 ];
+
 
 @NgModule({
   declarations: [
@@ -95,6 +90,9 @@ const routes: Routes = [
     //  routing,
     //  AppRouting,
      FlashMessagesModule.forRoot(),
+     NgbCarouselModule.forRoot(),
+     NgbAlertModule.forRoot(),
+     Ng4LoadingSpinnerModule.forRoot(),
      RouterModule.forRoot(routes,{onSameUrlNavigation: 'reload'}) 
   ],
   providers: [

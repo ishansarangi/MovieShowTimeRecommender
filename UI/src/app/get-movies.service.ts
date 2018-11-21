@@ -8,14 +8,27 @@ import { environment } from 'src/environments/environment.prod';
 })
 export class GetMoviesService {
 
-  endPoint = environment.baseUrl + 'api/getMovies?type=nowPlaying';
+  endPoint = environment.baseUrl + 'api/getMovies?type=';
+
   httpOptions = {
-    headers: new HttpHeaders({ 'Authorization': 'Basic bW92aWVyZWNvbW1lbmRlcjpzM2N1ciFU' })
+    headers: new HttpHeaders({ 'Authorization': 'Basic bW92aWVyZWNvbW1lbmRlcjpzM2N1ciFU'})
   };
 
   constructor(private http: HttpClient) { }
 
   fetchMovies(){
-    return this.http.post(this.endPoint,this.httpOptions);
+    return this.http.post(this.endPoint+MovieCategory.nowPlaying,this.httpOptions);
   }
+  fetchPopularMovies(){
+    return this.http.post(this.endPoint+MovieCategory.popular,this.httpOptions);
+  }
+  fetchTopRatedMovies(){
+    return this.http.post(this.endPoint+MovieCategory.topRated,this.httpOptions);
+  }
+}
+
+enum MovieCategory{
+  nowPlaying = 'nowplaying',
+  topRated = 'toprated',
+  popular = 'popular'
 }

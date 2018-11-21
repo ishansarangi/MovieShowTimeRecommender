@@ -42,12 +42,12 @@ export class SignupComponent implements OnInit {
             response => {
               if (response.success){
                 console.log(response);
-                localStorage.setItem('currentUser', this.user.userName);
-                console.log(localStorage.getItem('currentUser'));
-
-                //store MYSESSIONID
-                localStorage.setItem('MYSESSIONID', this.cookieService.get("MYSESSIONID"));
-                console.log(localStorage.getItem('MYSESSIONID'));
+                let currentUser = {
+                  'username': this.user.userName,
+                  'token': 'MYSESSIONID=' + this.cookieService.get("MYSESSIONID")
+                }    
+                localStorage.setItem('currentUser', JSON.stringify(currentUser));
+                console.log("newAuth"+localStorage.getItem('currentUser'));
 
                 this.router.navigateByUrl('/home/movies');
 

@@ -1,10 +1,30 @@
-<div class="container-fluid" style="padding-top:5%;height: 100%;">
+<div class="center-div" *ngIf="!isLoaded">
+                <ng4-loading-spinner [threshold]="500" [timeout]="4000000" [template]="template" ></ng4-loading-spinner>
+                <!-- <ng4-loading-spinner> </ng4-loading-spinner> -->
+    </div>
+<div class="container-fluid" style="padding-top:1%;" *ngIf="isLoaded">
+        <h2 class="text-muted" id="title" style="text-align: center">NOW PLAYING</h2>
+        <!-- <h2 class="text-muted" id="title" style="text-align: center">PLAYING</h2> -->
     <div class="row">
+            <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                <ngb-carousel *ngIf="movies"style="outline:none;">
+                <ng-template ngbSlide *ngFor="let movie of movies">
+                    <img class="img-fluid mx-auto d-block" style="max-height:550px;" [src]="movie.backdrop_path" width="80%" (click)='routeMovie(movie.title,movie.poster_path,movie.overview,movie.id)'>
+                    <div class="carousel-caption">
+                        <h3>{{movie.title}}</h3>
+                        <!-- <p>{{slider.text}}</p> -->
+                    </div>
+                </ng-template>
+            </ngb-carousel>
+        </div>
+    </div>
+
+    <!-- <div class="row">
         <div class="col-sm-2 col-md-2 col-lg-3 col-xl-3">
 
         </div>
         <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
-            <p-carousel numVisible="5" pageLinks="10" circular="true" firstVisible="1" headerText="Now Playing" [value]="movies">
+            <p-carousel numVisible="1" circular="true" firstVisible="1" headerText="Now Playing" [value]="movies">
                 <ng-template let-movie pTemplate="item">
                     <div class="ui-grid ui-grid-responsive">
                         <div class="ui-grid-row">
@@ -28,26 +48,26 @@
         <div class="col-sm-2 col-md-2 col-lg-6 col-xl-6">
 
         </div>
-    </div>
-    <div class="row" style="padding-top: 10em;">
+    </div> -->
+    <div class="row" style="padding-top: 5em;">
         <div class="col-sm-2 col-md-2 col-lg-3 col-xl-3">
 
         </div>
         <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
-            <p-carousel numVisible="10" pageLinks="10" circular="true" firstVisible="1" headerText="Featured Trailers"
-                [value]="movies">
+            <p-carousel numVisible="7" pageLinks="10" circular="true" firstVisible="1" headerText="Popular Movies" 
+                [value]="popularMovies">
                 <ng-template let-movie pTemplate="item">
                     <div class="ui-grid ui-grid-responsive">
                         <div class="ui-grid-row">
                             <div class="ui-grid-col-12">
-                                    <img src={{movie.poster_path}} (click)='showTrailer(movie.trailerId)'
+                                    <img src={{movie.poster_path}} (click)='routeMovie(movie.title,movie.poster_path,movie.overview,movie.id)'
                                     width=100%>
                             </div>
                         </div>
 
                     </div>
                     <div class="ui-grid-row">
-                        <div class="ui-grid-col-6">
+                        <div class="ui-grid-col-12">
                             <span id="movieTitle">
                                 {{movie.title}}
                             </span>
@@ -56,10 +76,41 @@
                 </ng-template>
             </p-carousel>
         </div>
-        <div class="col-sm-2 col-md-2 col-lg-6 col-xl-6">
+        <div class="col-sm-2 col-md-2 col-lg-3 col-xl-3">
 
         </div>
     </div>
+    <div class="row" style="padding-top: 5em; padding-bottom: 5em">
+            <div class="col-sm-2 col-md-2 col-lg-3 col-xl-3">
+    
+            </div>
+            <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                <p-carousel numVisible="7" pageLinks="10" circular="true" firstVisible="1" headerText="Top Rated Movies" 
+                    [value]="topRatedMovies">
+                    <ng-template let-movie pTemplate="item">
+                        <div class="ui-grid ui-grid-responsive">
+                            <div class="ui-grid-row">
+                                <div class="ui-grid-col-12">
+                                        <img src={{movie.poster_path}} (click)='routeMovie(movie.title,movie.poster_path,movie.overview,movie.id)'
+                                        width=100%>
+                                </div>
+                            </div>
+    
+                        </div>
+                        <div class="ui-grid-row">
+                            <div class="ui-grid-col-12">
+                                <span id="movieTitle">
+                                    {{movie.title}}
+                                </span>
+                            </div>
+                        </div>
+                    </ng-template>
+                </p-carousel>
+            </div>
+            <div class="col-sm-2 col-md-2 col-lg-3 col-xl-3">
+    
+            </div>
+        </div>
 </div>
 
 

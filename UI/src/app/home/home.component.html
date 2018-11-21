@@ -1,10 +1,10 @@
   
-  <div class = "container-fluid mainContainer" style="height:700px;">
+  <div class = "container-fluid mainContainer" style="height:100%;">
       <div class = "row"  style="height:8%;">
         <div class = "mainNavBar col-sm-12 col-md-12 col-lg-12 col-xl-12">
           <div class = "container-fluid">
             <div class = "row">
-              <div class = "col-sm-0 col-md-0 col-lg-0 col-xl-0" style="text-align:left;padding-left: 0px;padding-bottom: .5em;">
+              <div class = "col-sm-0 col-md-0 col-lg-0 col-xl-0" style="text-align:left;padding-left: 0px;padding-bottom: .5em;" (click)="goHome()">
                 <span id = "titleApp"> M<span class = "titleSmall">OVIE</span>R<span class = "titleSmall">EC</span></span>
               </div>
               <div class = "rightBox col-sm-10 col-md-10 col-lg-10 col-xl-10" style="padding-inline-end:0px;position: absolute; right: 0;vertical-align: middle;height:100%">
@@ -16,9 +16,8 @@
           
         </div>
       </div>
-      <div class = "row"  style="height:95%">
+      <div class = "row"  style="height:93%">
           <div class = "content col-sm-12 col-md-12 col-lg-12 col-xl-12">
             <router-outlet></router-outlet>
-          </div>
-        </div>
-    </div>
+          </div>      </div>
+  </div>

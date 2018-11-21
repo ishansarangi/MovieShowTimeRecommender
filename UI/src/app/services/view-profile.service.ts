@@ -18,7 +18,8 @@ export class ViewProfileService {
   constructor(private http:HttpClient) { }
 
   fetchUserDetails():Observable<User>{
-    let userName = localStorage.getItem('currentUser'); 
+    let currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    let userName = currentUser['username']; 
     return this.http.get<User>(environment.baseUrl + 'profile/fetch/'+userName, this.httpOptions);
   }
 
