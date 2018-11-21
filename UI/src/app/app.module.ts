@@ -35,7 +35,7 @@ import { AlertComponent } from './_directives';
 import { AuthGuard } from './_guards';
 import { AlertService, AuthenticationService, UserService } from './_services';
 import { JwtInterceptor, ErrorInterceptor } from './_helpers';
-
+import { RatingModule } from 'primeng/rating';
 
 const routes: Routes = [
   { path: '', component: LoginComponent},
@@ -90,6 +90,7 @@ const routes: Routes = [
      HttpClientModule,
      CardModule,
      CarouselModule,
+     RatingModule,
      NgbModule,
     //  routing,
     //  AppRouting,

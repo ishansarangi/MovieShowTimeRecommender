@@ -18,7 +18,9 @@
                 </h2>
 
               </div>
-
+              <div class="col-md-6">
+                <p-rating [(ngModel)]="ratings" [cancel]="false" (onRate)="storeRatings()"></p-rating>
+              </div>
             </div>
             <div class="row">
               <div class="col-md-12">
@@ -55,7 +57,37 @@
     </div>
   </div>
 </div>
-<p-dialog [(visible)]="displayTrailer" [positionTop]="50" [dismissableMask]="true" [blockScroll]="true" [showHeader]="false" [minWidth]="200"
-  minY="-100">
+<div class="row" *ngIf = "showRecom" style="padding-top: 5em;">
+  <div class="col-sm-2 col-md-2 col-lg-3 col-xl-3">
+
+  </div>
+  <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+      <p-carousel numVisible="7" pageLinks="10" circular="true" firstVisible="1" headerText="Recommended Movies" 
+          [value]="movies">
+          <ng-template let-movie pTemplate="item">
+              <div class="ui-grid ui-grid-responsive">
+                  <div class="ui-grid-row">
+                      <div class="ui-grid-col-12">
+                              <img src={{movie.poster_path}} width=100%>
+                      </div>
+                  </div>
+
+              </div>
+              <div class="ui-grid-row">
+                  <div class="ui-grid-col-12">
+                      <span id="movieTitle">
+                          {{movie.title}}
+                      </span>
+                  </div>
+              </div>
+          </ng-template>
+      </p-carousel>
+  </div>
+  <div class="col-sm-2 col-md-2 col-lg-3 col-xl-3">
+
+  </div>
+</div>
+<p-dialog [(visible)]="displayTrailer" [positionTop]="50" [dismissableMask]="true" [blockScroll]="true" [showHeader]="false"
+  [minWidth]="200" minY="-100">
   <app-trailer *ngIf="displayTrailer" [trailerUrl]='trailer'></app-trailer>
 </p-dialog>

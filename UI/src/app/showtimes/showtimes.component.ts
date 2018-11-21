@@ -1,9 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { ShowtimesService } from '../services/showtimes.service'
+import { ShowtimesService } from '../services/showtimes.service';
+import { RecommendationService } from '../services/recommendation.service';
+import { RatingsService } from '../services/ratings.service';
 import { CookieService } from 'ngx-cookie-service';
 import { ThetreDetails } from './theatres';
 import { Shows } from "./shows"
 import { analyzeAndValidateNgModules } from '@angular/compiler';
+import { Router } from '@angular/router';
+import { MoviesDetails } from "../movie-details/movie";
+import { User } from "../_models/user";
 @Component({
   selector: 'app-showtimes',
   templateUrl: './showtimes.component.html',
@@ -16,6 +21,10 @@ export class ShowtimesComponent implements OnInit {
   movieId: String;
   displayTrailer: boolean;
   trailer: String;
+  movies: MoviesDetails[];
+  ratings: String;
+  user:User;
+  showRecom = false;
   movieStyle = {
 
     'width': '100%',
@@ -26,7 +35,7 @@ export class ShowtimesComponent implements OnInit {
   finalTheatreList: Array<Shows> = [];
   filteredShowtimes: Array<ThetreDetails> = [];
   dates: Array<String> = [];
-  constructor(private fetchShows: ShowtimesService,private cookieService:CookieService) {
+  constructor(private rating:RatingsService, private recommend:RecommendationService,private router:Router,private fetchShows: ShowtimesService,private cookieService:CookieService) {
     this.movieName = this.cookieService.get("movieName");
     this.moviePoster = this.cookieService.get("moviePoster");
     this.movieId = this.cookieService.get("movieId");
@@ -57,6 +66,16 @@ export class ShowtimesComponent implements OnInit {
           }
         }
       )
+      this.recommend.fetchRecommendations(this.movieId)
+      .subscribe(
+        r =>{
+          console.log(r);
+          this.movies = r["results"];
+          if(this.movies.length > 0)
+          this.showRecom = true;
+          console.log("Recommended" + this.movies);
+        }
+      );
   }
 
   ngOnInit() {
@@ -112,5 +131,25 @@ export class ShowtimesComponent implements OnInit {
     }
     return time.join (''); 
   }
+  routeMovie(movieName, poster,movieDesc,movieId) {
+    this.cookieService.set("moviePoster", poster);
+    this.cookieService.set("movieName", movieName);
+    this.cookieService.set("movieDesc", movieDesc);
+    this.cookieService.set("movieId", movieId);
+    console.log("From Cookies- " + this.cookieService.get('movieName'));
+    this.router.navigateByUrl('/home/showtimes');
+    window.location.reload();
+  }
+  storeRatings(){
+    console.log(localStorage.getItem('currentUser').substr(13,6))
+    this.rating.storeRating(JSON.stringify(localStorage.getItem('currentUser').substr(13,6)), this.movieId,this.ratings,this.movieName)
+    .subscribe(
+      r =>{
+        console.log(r);
+      }
+    );
+  }
 
 }
+
+
