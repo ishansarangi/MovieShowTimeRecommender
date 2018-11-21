@@ -455,10 +455,27 @@ public class TheMovieDBServiceBean implements TheMovieDBService {
 //		cinemaList.setShowtimesByTheatreAndDate(showtimesByTheatreAndDate);
 		
 		NowPlayingMovies nowPlayingMovies =null;
+		Map<String,List<ShowDetails>> tempMap = null;
+		CinemaShowtimes cinemaShowtimes =null;
+		List<CinemaShowtimes> listCinemaShowTimes =null;
 		for(Entry<String,Map<String,List<ShowDetails>>> entry: showtimesByTheatreAndDate.entrySet())
 		{
 			nowPlayingMovies =null;
-			nowPlayingMovies = new NowPlayingMovies(entry.getKey(),entry.getValue());
+			tempMap =null;
+			tempMap = entry.getValue();
+			if(null!=tempMap)
+			{
+				listCinemaShowTimes = new ArrayList<>();
+				for(Entry<String,List<ShowDetails>> entrySet: tempMap.entrySet())
+				{
+				  	cinemaShowtimes =null;
+				  	cinemaShowtimes = new CinemaShowtimes(entrySet.getKey(),entrySet.getValue());
+				  	listCinemaShowTimes.add(cinemaShowtimes);
+				}
+			}
+			
+			
+			nowPlayingMovies = new NowPlayingMovies(entry.getKey(),listCinemaShowTimes);
 			listNowPlaying.add(nowPlayingMovies);
 		}
 
