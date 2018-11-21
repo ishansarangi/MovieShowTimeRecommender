@@ -24,5 +24,5 @@ public interface TheMovieDBService {
 
 	ResponseEntity<MoviesList> getRecommendedMovies(String movieId) throws MovieDetailsException;
 
-	public ResponseEntity<CinemasList> getCinemasNew(String movieName, String movieId) throws MovieDetailsException;
+	public ResponseEntity<?> getCinemasNew(String movieName, String movieId) throws MovieDetailsException;
 }
