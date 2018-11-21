@@ -89,6 +89,6 @@
   </div>
 </div>
 <p-dialog [(visible)]="displayTrailer" [positionTop]="50" [dismissableMask]="true" [blockScroll]="true" [showHeader]="true"
-  [minWidth]="200" minY="-100">
+  [minWidth]="200" minY="-100" [responsive]="true">
   <app-trailer *ngIf="displayTrailer" [trailerUrl]='trailer'></app-trailer>
 </p-dialog>

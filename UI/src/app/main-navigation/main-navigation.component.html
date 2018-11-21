@@ -12,9 +12,9 @@
         </div>
     </div>
     
-    <p-dialog header="LogIn" [(visible)]="displayLogin" [modal]=true [width]="350" [minWidth]="200" [minY]="70" [dismissableMask]="true" [closeOnEscape]="false" [responsive]="true" [closable]="true" (onBeforeHide)="cancel($event)">
+    <p-dialog header="LogIn" [(visible)]="displayLogin" [modal]=true [width]="350" [minWidth]="200" [minY]="70" [dismissableMask]="true" [closeOnEscape]="true" [responsive]="true" [closable]="true" (onBeforeHide)="cancel($event)">
         <app-signin></app-signin>
     </p-dialog>
-    <p-dialog header="SignUp" [(visible)]="displaySignup" [modal]=true [width]="800" [minWidth]="200" [minY]="70" [dismissableMask]="true" [closeOnEscape]="false" [responsive]="true" [closable]="true" (onAfterHide)='cancel($event)'>
+    <p-dialog header="SignUp" [(visible)]="displaySignup" [modal]=true [width]="800" [minWidth]="200" [minY]="70" [dismissableMask]="true" [closeOnEscape]="true" [responsive]="true" [closable]="true" (onAfterHide)='cancel($event)'>
         <app-signup></app-signup>
     </p-dialog>
