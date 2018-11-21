@@ -2,3 +2,56 @@
     background-color: #ffffff;
     color:rgb(0,0,0);
 }
+.dropdown:hover .dropdown-menu {
+    display: block;
+    width: 100%;
+    border: none;
+    }
+
+body .ui-tabview .ui-tabview-panels{
+    color: #292828;
+}     
+label{
+    color: #020202;
+} 
+.button1 {
+    border-radius: 4px;
+    font-size: 1em;
+}
+.alert-danger {
+    color: #fcfcfc;
+    background-color: #aa3d3d;
+    border-color: #883442;
+  }
+  :host>>> .ui-widget {
+    font-size: 12px;
+  }
+  :host>>> .ui-widget {
+    font-size: 1.05em;
+  }  
+  :host>>>  .ui-inputtext{
+    background-color:white;
+    color:black;
+    border:1px solid #ccc;
+  }
+.row{
+    padding-top:1.5em;
+}
+.input-group-addon{
+    padding-bottom: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
+    padding-top: 0px;
+    background-color: #ffffff;
+}
+.input-group-addon button{
+   
+    padding-bottom: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
+    padding-top: 0px;
+}
+.button1{
+    background-color: rgb(56, 145, 204);
+    border-color: rgb(56, 145, 204);
+}

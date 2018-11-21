@@ -2,3 +2,14 @@
     background-color: #000000;
     border-width: 0em;
 }
+:host >>> .ui-dialog .ui-dialog-content{
+    background-color: #ffffff;
+    border-radius: 5px;
+    /* border-color: #000000; */
+}
+:host >>> .ui-dialog .ui-dialog-titlebar{
+    background-color: rgb(56, 145, 204);
+}
+:host >>>  .ui-dialog .ui-dialog-titlebar .ui-dialog-titlebar-icon{
+    color:rgb(0,0,0);
+}
