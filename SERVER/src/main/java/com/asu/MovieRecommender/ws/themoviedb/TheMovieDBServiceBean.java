@@ -7,6 +7,7 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.logging.log4j.LogManager;
@@ -393,9 +394,10 @@ public class TheMovieDBServiceBean implements TheMovieDBService {
 	}
 	
 	@Override
-	public ResponseEntity<CinemasList> getCinemasNew(String movieName, String movieId) throws MovieDetailsException {
+	public ResponseEntity<?> getCinemasNew(String movieName, String movieId) throws MovieDetailsException {
 		String city = Constants.TEMPE;
 		CinemasList cinemaList = new CinemasList();
+		List<NowPlayingMovies> listNowPlaying = new ArrayList<>();
 		Map<String, Map<String, List<ShowDetails>>> showtimesByTheatreAndDate = new HashMap<>();
 		try {
 			putTheatreForCity(city);
@@ -450,9 +452,17 @@ public class TheMovieDBServiceBean implements TheMovieDBService {
 			throw new MovieDetailsException("Error while putting theatre names to the cache for city:" + city);
 		}
 		
-		cinemaList.setShowtimesByTheatreAndDate(showtimesByTheatreAndDate);
+//		cinemaList.setShowtimesByTheatreAndDate(showtimesByTheatreAndDate);
+		
+		NowPlayingMovies nowPlayingMovies =null;
+		for(Entry<String,Map<String,List<ShowDetails>>> entry: showtimesByTheatreAndDate.entrySet())
+		{
+			nowPlayingMovies =null;
+			nowPlayingMovies = new NowPlayingMovies(entry.getKey(),entry.getValue());
+			listNowPlaying.add(nowPlayingMovies);
+		}
 
-		return new ResponseEntity<CinemasList>(cinemaList, HttpStatus.OK);
+		return new ResponseEntity<List<NowPlayingMovies>>(listNowPlaying, HttpStatus.OK);
 	}
 
 	public void putTheatreForCity(String city) throws MovieDetailsException {
