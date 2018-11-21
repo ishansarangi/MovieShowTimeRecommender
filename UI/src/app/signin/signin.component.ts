@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import {LoginService} from '../login.service';
 import {Router, ActivatedRoute} from '@angular/router';
 import { AuthenticationService } from '../_services';
@@ -8,7 +8,7 @@ import { AuthenticationService } from '../_services';
   templateUrl: './signin.component.html',
   styleUrls: ['./signin.component.css']
 })
-export class SigninComponent implements OnInit {
+export class SigninComponent implements OnInit, OnDestroy {
   username: string;
   userPassword: string;
   errorMessage: string;
@@ -23,7 +23,11 @@ export class SigninComponent implements OnInit {
         this.authenticationService.logout();
 
         // get return url from route parameters or default to '/'
-        this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+        this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/home/movies';
+  }
+
+  ngOnDestroy(){
+    // this.returnUrl = null;
   }
 
   performLogin(){
@@ -42,7 +46,7 @@ export class SigninComponent implements OnInit {
             console.log(r)
             if (r.status == 200) {
               // this.router.navigateByUrl('/home/movies');
-              this.router.navigate([this.returnUrl]);
+              this.router.navigateByUrl(this.returnUrl);
             } else {
               alert(console.error());
               this.loading = false;

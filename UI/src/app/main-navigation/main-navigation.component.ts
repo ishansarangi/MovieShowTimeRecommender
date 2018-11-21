@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MenuItem } from 'primeng/api';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 @Component({
   selector: 'app-main-navigation',
   templateUrl: './main-navigation.component.html',
@@ -23,7 +23,7 @@ export class MainNavigationComponent implements OnInit {
       } 
     }
 
-  constructor(private route: ActivatedRoute) {
+  constructor(private router: Router,private route: ActivatedRoute) {
     this.route.queryParams.subscribe(params => {
         if (params['openLogin'] == "true"){
           this.showDialog('login')
@@ -32,18 +32,11 @@ export class MainNavigationComponent implements OnInit {
 }
 
   ngOnInit() {
-    this.items = [
-        {
-            label: 'Movies',
-            icon: 'fa fa-angle-down',
-            disabled: true
-        },
-        {
-          label: 'Theatres',
-          icon: 'fa fa-angle-down',
-          disabled: true
-      }
-    ];
+}
+
+cancel(event){
+  this.router.navigateByUrl('/');
+  this.route.snapshot.queryParams['returnUrl'] = []
 }
 
 }

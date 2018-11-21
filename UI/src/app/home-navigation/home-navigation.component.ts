@@ -22,18 +22,6 @@ export class HomeNavigationComponent implements OnInit {
   constructor(private router: Router, private authService: AuthenticationService) { }
 
   ngOnInit() {
-    this.items = [
-        {
-            label: 'Movies',
-            icon: 'fa fa-angle-down',
-            disabled: true
-        },
-        {
-          label: 'Theatres',
-          icon: 'fa fa-angle-down',
-          disabled: true
-      }
-    ];
   }
 
   //Clear the session

@@ -13,12 +13,17 @@ export class LoginComponent implements OnInit {
     if (currentUser && currentUser.token) {
       if (currentUser) {
         console.log(currentUser)
-        this.router.navigateByUrl('/home');
+        this.router.navigateByUrl('/home/movies');
       }
     }
   }
 
   ngOnInit() {
+    let currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    if ((currentUser && currentUser.token) == false) {
+        this.router.navigateByUrl('/');
+    }
+
   }
 
 }
