@@ -35,7 +35,7 @@ public class RatingsController {
 			if (null != userRating) {
 				ratingsService.rateMovie(userRating);
 				return new ResponseEntity<Response>(new Response(String.valueOf(HttpStatus.SC_OK), true, ""),
-						org.springframework.http.HttpStatus.BAD_REQUEST);
+						org.springframework.http.HttpStatus.OK);
 			} else {
 				return new ResponseEntity<Response>(
 						new Response(String.valueOf(HttpStatus.SC_BAD_REQUEST), false, "Details are blank or null"),
