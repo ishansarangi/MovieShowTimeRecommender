@@ -140,9 +140,12 @@ export class ShowtimesComponent implements OnInit {
     this.router.navigateByUrl('/home/showtimes');
     window.location.reload();
   }
+
   storeRatings(){
     console.log(localStorage.getItem('currentUser').substr(13,6))
-    this.rating.storeRating(JSON.stringify(localStorage.getItem('currentUser').substr(13,6)), this.movieId,this.ratings,this.movieName)
+    let currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    let userName = currentUser['username']; 
+    this.rating.storeRating(userName, this.movieId,this.ratings,this.movieName)
     .subscribe(
       r =>{
         console.log(r);
