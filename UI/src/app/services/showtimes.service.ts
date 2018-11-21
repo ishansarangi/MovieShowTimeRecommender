@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpParams, HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { environment } from 'src/environments/environment.prod';
+import { Observable, Subject, throwError} from 'rxjs';
+import { map } from "rxjs/operators";
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +16,7 @@ export class ShowtimesService {
 
   constructor(private http: HttpClient) { }
 
-  fetchShowtimes( movieName,movieId){
+  fetchShowtimes( movieName,movieId): Observable<any>{
     console.log("Before Appending Movie Details to Showtime: " + this.endPoint);
     if(this.endPoint.indexOf("?")>0)
       this.endPoint = this.endPoint.substr(0,this.endPoint.indexOf("?"));
@@ -22,5 +24,6 @@ export class ShowtimesService {
     console.log("Fetch" + movieName);
     this.endPoint = this.endPoint.concat("?movieName=") + movieName + "&movieId=" + movieId;
     return this.http.post(this.endPoint,this.httpOptions);
+    return this.http.post(this.endPoint,this.httpOptions).pipe(map((response: any) => response.json()))
   }
 }
