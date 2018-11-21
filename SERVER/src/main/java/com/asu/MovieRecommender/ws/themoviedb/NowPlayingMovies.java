@@ -11,12 +11,20 @@ public class NowPlayingMovies implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	private String date;
+	private String trailerLink;
 	
 	
-	public NowPlayingMovies(String date,  List<CinemaShowtimes> theatreShowDetails) {
+	public String getTrailerLink() {
+		return trailerLink;
+	}
+	public void setTrailerLink(String trailerLink) {
+		this.trailerLink = trailerLink;
+	}
+	public NowPlayingMovies(String date,  List<CinemaShowtimes> theatreShowDetails,String trailerLink) {
 		super();
 		this.date = date;
 		this.theatreShowDetails = theatreShowDetails;
+		this.trailerLink =trailerLink;
 	}
 	public NowPlayingMovies() {
 		
