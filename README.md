@@ -1,6 +1,6 @@
 # MovieShowTimeRecommender
 
-The complete application can be accessed on [http://34.196.69.61:4200](http://34.196.69.61:4200)
+The complete application can be accessed on [http://35.196.69.61:4200](http://35.196.69.61:4200)
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.2.1.
 
