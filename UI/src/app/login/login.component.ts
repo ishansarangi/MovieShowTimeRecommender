@@ -9,17 +9,21 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
 
   constructor(private router: Router){
-    let userName = localStorage.getItem('currentUser'); 
-    // TODO
-    // let sessionID = localStorage.getItem('MYSESSIONID'); 
-    if(userName != null){ //&& sessionID != null){
-      if (userName.length != 0 ){ //&& sessionID.length != 0){
-        this.router.navigateByUrl('/home');
+    let currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    if (currentUser && currentUser.token) {
+      if (currentUser) {
+        console.log(currentUser)
+        this.router.navigateByUrl('/home/movies');
       }
     }
   }
 
   ngOnInit() {
+    let currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    if ((currentUser && currentUser.token) == false) {
+        this.router.navigateByUrl('/');
+    }
+
   }
 
 }

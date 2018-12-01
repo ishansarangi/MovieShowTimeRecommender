@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from '../model/user';
 import { ViewProfileService } from '../services/view-profile.service';
 import { Router } from '@angular/router';
-
+import { User } from '../_models';
+import { FlashMessagesService } from 'angular2-flash-messages'
 @Component({
   selector: 'app-user-profile',
   templateUrl: './user-profile.component.html',
@@ -21,7 +21,7 @@ export class UserProfileComponent implements OnInit {
   
   buttonName: String = "Edit Profile";
 
-  constructor(private api: ViewProfileService, private router: Router) { }
+  constructor(private api: ViewProfileService, private router: Router,private flashMessage:FlashMessagesService) { }
 
   ngOnInit() {
     this.api.fetchUserDetails().subscribe(
@@ -33,8 +33,7 @@ export class UserProfileComponent implements OnInit {
         console.log(response);
       },
       responseError => {
-        this.display = true;
-        this.userMessage = "Server error: Something went wrong!";
+        this.flashMessage.show("Server error: Something went wrong!", { cssClass: 'alert-danger'});
       }
     )
 
@@ -50,54 +49,30 @@ export class UserProfileComponent implements OnInit {
 
     this.userMessage = "";
     if (this.user.userContactNo.length != 10) {
-      this.display = true;
-      this.userMessage = "Please enter a 10 digit Mobile Number!";
-      console.log("mobile");
+      this.flashMessage.show("Please enter a 10 digit Mobile Number!", { cssClass: 'alert-danger'});
 
     }
     else if (this.user.firstName.length == 0) {
-
-      this.display = true;
-      this.userMessage = "Please enter a valid FirstName!";
-      console.log("fn");
+      this.flashMessage.show("Please enter a valid FirstName!", { cssClass: 'alert-danger'});
     }
 
     else if (this.user.lastName.length == 0) {
-
-      this.display = true;
-      this.userMessage = "Please enter a valid LastName!";
-      console.log("ln");
+      this.flashMessage.show("Please enter a valid LastName!", { cssClass: 'alert-danger'});
     }
 
     else if (this.user.userName.length == 0) {
-
-      this.display = true;
-      this.userMessage = "Please enter a valid UserName!";
-      console.log("un");
+      this.flashMessage.show("Please enter a valid UserName!", { cssClass: 'alert-danger'});
     }
 
     else if (!this.validateEmail(this.user.userEmailId) || this.user.userEmailId.length == 0) {
-
-      this.display = true;
-      this.userMessage = "Please enter a valid email!";
-      console.log("mid");
+      this.flashMessage.show("Please enter a valid email!", { cssClass: 'alert-danger'});
     }
-
-    //TODO: Make date comparison for age and empty date
-
-    // else if (this.user.userDOB.length == 0) {
-
-    //   this.display = true;
-    //   this.userMessage = "Please enter a valid Date Of Birth!";
-    //   console.log("dob");
-    // }
     else {
       this.api.editProfileWith(this.user).subscribe(
         response => {
           if (response.success) {
+            this.flashMessage.show("User details updated successfully!", { cssClass: 'alert-success'});
             console.log(response);
-            this.display = true;
-            this.userMessage = "User details updated successfully!";
           }
 
           else {
@@ -105,8 +80,7 @@ export class UserProfileComponent implements OnInit {
           }
         },
         responseError => {
-          this.display = true;
-          this.userMessage = "Server error: Registration failed!";
+          this.flashMessage.show("Server error: User details update failed!", { cssClass: 'alert-danger'});
         }
       )
     }

@@ -1,48 +1,94 @@
 <div class="container-fluid" [ngStyle]="movieStyle">
-  <div class="row">
-    <p-card>
-      <div class="container-fluid" style="width:100%">
-        <div class="row">
-          <div class="col-md-2 poster" [ngStyle]="setMyStyle()"></div>
-          <div class="col-md-10">
-            <div class="row">
+  <div class="row" style="height: 3em;background-color: #191919;">
+    <div class="col-md-12" [ngStyle]="setMyStyleTrailer()" (click)="showTrailer()">
+      <button pButton type="button" icon="fa fa-play-circle fa-5x" (click)="showTrailer()" style="text-align: center;"></button>
+    </div>
+  </div>
+
+  <div class="row" style="padding-top: 15em;">
+    <!-- <p-card>  -->
+      <div class="container-fluid" style="width:100%" style="background-color: #191919;">
+        <div class="row" style="padding-left: 5em;">
+          <div class="col-md-2 poster" [ngStyle]="setMyStyle()">
+          </div>
+          <div class="col-md-10" style="padding-left: 3em; ">
+            <div class="row" style="padding-top: 15em; ">
               <div class="col-md-6">
-                <h2>
+                <h2 style="-webkit-text-fill-color: #ffffff;">
                   {{movieName}}
                 </h2>
 
               </div>
-
+              <div class="col-md-6" style="text-align: right; padding-right: 5em">
+                <p-rating [(ngModel)]="ratings" [cancel]="false" (onRate)="storeRatings()"></p-rating>
+              </div>
             </div>
-            <div class="row">
+            <div class="row" style="padding-top: 1em; padding-right: 5em;">
               <div class="col-md-12">
-                <h4>
+                <p style="-webkit-text-fill-color: #ffffff;">
                   {{movieDesc}}
-                </h4>
+                </p>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </p-card>
+    <!-- </p-card> -->
   </div>
-  <div class="row" *ngFor="let theatre of finalTheatreList">
-    <div class="col-md-12" style="padding-top:3em;">
-        <div class="container-fluid theatres" >
-            <div class="row" style="padding-top: 2em">
-              <div class="ui-grid-col-12">
-                <h3 style="color:white;text-align: center;">{{theatre.name}}</h3>
-              </div>
-            </div>
-            <div class="row" style="padding-top: 2em">
-              <div class="col-md-3" style="padding: 2em" *ngFor="let show of theatre.movieList">
-                <button pButton type="button" (click)="bookPage(show.booking_link)" label="{{show.date}} {{show.time}}"></button>
-              </div>
-            </div>
-          </div>
+  <div class="row" style="padding-top: 1em; padding-bottom: 1em;padding-left: 3em;background-color: #191919;">
+    <div class="showDates" *ngFor="let date of dates">
+      <button pButton type="button" [label]="date" (click)="filterDate(date)" class="ui-button-info btn-circle"></button>
     </div>
-    
   </div>
+  <div class="row" *ngFor="let theatre of filteredShowtimes">
+    <div class="col-md-12" style="padding-top:2em;">
+      <div class="container-fluid">
+        <div class="row" style="padding-top: 1em">
+          <div class="ui-grid-col-12">
+            <h3 style="color:#ffffff;text-align: center;">{{theatre.cinemaName}}</h3>
+          </div>
+        </div>
+        <div class="row" style="display: flex;align-items: center;justify-content: center;">
+          <div *ngFor="let show of theatre.showDetails">
+            <button pButton type="button" class="ui-button-info btn-links" (click)="bookPage(show.bookingLink)" label="{{show.showTime}}"></button>
 
-
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
+<div class="row" *ngIf = "showRecom" style="padding-top: 5em;padding-bottom: 1em;">
+  <div class="col-sm-2 col-md-2 col-lg-3 col-xl-3">
+
+  </div>
+  <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+      <p-carousel numVisible="7" pageLinks="10" circular="true" firstVisible="1" headerText="Recommended Movies" 
+          [value]="movies">
+          <ng-template let-movie pTemplate="item">
+              <div class="ui-grid ui-grid-responsive">
+                  <div class="ui-grid-row">
+                      <div class="ui-grid-col-12">
+                              <img src={{movie.poster_path}} width=100%>
+                      </div>
+                  </div>
+
+              </div>
+              <div class="ui-grid-row">
+                  <div class="ui-grid-col-12">
+                      <span id="movieTitle">
+                          {{movie.title}}
+                      </span>
+                  </div>
+              </div>
+          </ng-template>
+      </p-carousel>
+  </div>
+  <div class="col-sm-2 col-md-2 col-lg-3 col-xl-3">
+
+  </div>
+</div>
+<p-dialog [(visible)]="displayTrailer" [positionTop]="50" [dismissableMask]="true" [blockScroll]="true" [showHeader]="true"
+  [minWidth]="200" minY="-100" [responsive]="true">
+  <app-trailer *ngIf="displayTrailer" [trailerUrl]='trailer'></app-trailer>
+</p-dialog>

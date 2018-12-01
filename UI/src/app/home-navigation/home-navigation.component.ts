@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MenuItem } from 'primeng/api';
 import { Router } from '@angular/router';
+import { AuthenticationService } from '../_services';
 
 @Component({
   selector: 'app-home-navigation',
@@ -18,28 +19,18 @@ export class HomeNavigationComponent implements OnInit {
     console.log("Fetched.");
   }
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private authService: AuthenticationService) { }
 
   ngOnInit() {
-    this.items = [
-        {
-            label: 'Movies',
-            icon: 'fa fa-angle-down',
-            disabled: true
-        },
-        {
-          label: 'Theatres',
-          icon: 'fa fa-angle-down',
-          disabled: true
-      }
-    ];
   }
 
   //Clear the session
   logOut(){
-    localStorage.removeItem('currentUser');
-    localStorage.removeItem('MYSESSIONID');
-    this.router.navigateByUrl('/');
+    this.authService.logout();//.subscribe(r=>{
+    //   if (r.status == 200){
+        this.router.navigateByUrl('/');
+    //   }
+    // })
   }
 
 }
