@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders} from '@angular/common/http';
 import { Observable, of } from 'rxjs';
-import { Login } from '../login';
+import { APIResponse } from '../_models/apiResponse';
 import { environment } from 'src/environments/environment';
 
 
@@ -17,10 +17,10 @@ export class RegisterUserService {
   };
   constructor(private http:HttpClient) { }
 
-  registerUser(user):Observable<Login>{
+  registerUser(user):Observable<APIResponse>{
 
     var headers = new HttpHeaders();
     headers.set('Content-Type', 'application/json');
-    return this.http.post<Login>(environment.baseUrl + 'register/user/newUser', user, this.httpOptions);
+    return this.http.post<APIResponse>(environment.baseUrl + 'register/user/newUser', user, this.httpOptions);
   }
 }

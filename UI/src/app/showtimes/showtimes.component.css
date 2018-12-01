@@ -1,24 +1,91 @@
-:host >>>  .ui-card-body{
-height:15em;
-width:100%;
-padding-top:1.5em;
-padding-left:1.5em;
-padding-bottom: 0.2em;
+:host >>> button{
+    background-color: transparent;
+    border: none;
+    margin-left: 49%;
+    margin-top: 15em;
+    height: 5em;
+    width: 5em;
 }
-:host >>>  .ui-corner-all{
-    border-radius:10px;
+
+:host >>> .ui-card{
+    background-color: #191919;
+    box-shadow: none;
+    width: 100%;
 }
-.poster{
-   
-}
-:host >>>  .ui-card-content{
-    margin-bottom: 0em;
-}
-:host >>>  .ui-card-footer{
-    height:0em;
-}
+
 .theatres{
     border: 2px;
     border-radius:10px;
-    background-color: #323232;
+    background-color: #191919;
+}
+
+:host >>> .ui-button .ui-button-icon-only{
+    width: 100%;
+    height: 100%;
+}
+:host >>> .ui-button:enabled:hover {
+    background-color: transparent;
+    border-color:transparent; 
+}
+
+:host >>> .ui-button:enabled:focus {
+    outline: 0 none;
+    outline-offset: 0px;
+    background-color: transparent; 
+}
+
+
+.btn-circle {
+    width: 40px;
+    height: 40px;
+    margin-left: 0px;
+    margin-top: 5px;
+    border-radius: 20px;
+    text-align: center;
+    font-size: 12px;
+    line-height: 1.42857;
+    font-weight: bold;
+}
+.showDates{
+    padding-left: 3em;
+}
+:host >>> .ui-button.ui-state-default.ui-button-info{
+    background-color: #ffffff;
+    color:#007ad9;
+}
+:host >>> .ui-button:enabled:active {
+color: white;
+}
+:host >>> .ui-button:enabled:focus {
+    color: white;
+}
+
+.btn-links{
+    margin-top: 5px;
+    margin-left: 3em;
+    height: 3em;
+    width: 8em;
+}
+
+.ui-carousel-header{
+    background-color:#191919;
+}
+.ui-carousel-viewport{
+    background-color:#191919;
+}
+:host >>>  .ui-carousel .ui-carousel-viewport {
+    background-color:#191919;
+}
+:host >>>  .ui-carousel .ui-carousel-viewport .ui-carousel-items .ui-carousel-item {
+    padding-left: 0.8em;
+    padding-right: 0.8em;
+}
+:host >>>  .ui-carousel .ui-carousel-header {
+    background-color:#191919;
+    text-align: left;
+    height: 3.5em;
+}
+:host >>> .ui-carousel .ui-carousel-header .ui-carousel-header-title {
+    font-size: 1.5em;
+    padding-bottom: 0.7em;
 }

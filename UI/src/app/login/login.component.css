@@ -1,44 +1,46 @@
 .mainNavBar{
-    background-color: #191919;
+    background-color: #000000;
     height: 100%;
     width: 100%;
-    border-radius: 15px;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    
     text-align: center;
+    
 }
 
 .titleSmall{
+    font-family: 'Rye', cursive;
     font-size: 0.7em;
     color:rgb(56, 145, 204);
 }
 #titleApp{
-    font-size: 3em; 
+    font-family: 'Rye', cursive;
+    font-size: 2em; 
     color:rgb(56, 145, 204);
     padding-top: 0px;
 }
 .content{
     height: 100%;
     width: 100%;
-    border-radius: 15px;
-    border-width: 2.5px;
-    border-color: rgb(212, 210, 210);
-    border-style: solid;
-    background-image: url("/src/assets/MovieBackground.jpg");
-    background-repeat: no-repeat;
-    background-size: contain;
-    background-position: center;
+   background-image: url(/src/assets/BackgroundImage.jpg); /*url(http://bit.ly/2gPLxZ4);*/
+   background-repeat: no-repeat;
+   /* background-color: #191919; */
+   background-attachment: fixed;
+   background-size: cover;
 }
-
 
 .footer{
     height: 100%;
     width: 100%;
-    border-radius: 15px;
 }
 .mainContainer{
-    padding-left: 20px;
-    padding-right: 20px;
     padding-bottom: 20px;
     
+}
+
+.rightBox{
+    width:100%;
+    height: 100%;
+    overflow: auto;
+    margin: auto;
+    position: absolute;
 }

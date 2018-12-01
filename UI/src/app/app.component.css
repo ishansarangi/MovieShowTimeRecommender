@@ -1,0 +1,30 @@
+@font-face {
+    font-family: 'Voga' ;
+    src: url(/src/assets/fonts/VogaBold.ttf) format("truetype");
+  }
+
+  @font-face {
+    font-family: 'Cabin Sketch', cursive;
+    src: url(/src/assets/fonts/CabinSketch-Bold.ttf) format("truetype");
+  }
+
+  @font-face {
+    font-family: 'Diplomata SC', cursive;
+    src: url(/src/assets/fonts/DiplomataSC-Regular.ttf) format("truetype");
+  }
+  @font-face {
+    font-family: 'Frijole', cursive;
+    src: url(/src/assets/fonts/Frijole-Regular.ttf) format("truetype");
+  }
+  @font-face {
+    font-family: 'Kumar One', cursive;
+    src: url(/src/assets/fonts/KumarOne-Regular.ttf) format("truetype");
+  }
+  @font-face {
+    font-family: 'Vast Shadow', cursive;
+    src: url(/src/assets/fonts/VastShadow-Regular.ttf) format("truetype");
+  }
+  @font-face {
+    font-family: 'Bungee Inline', cursive;
+    src: url(/src/assets/fonts/BungeeInline-Regular.ttf) format("truetype");
+  }

@@ -1,23 +1,20 @@
-<div class = "container-fluid mainContainer" style="padding-top:1em;">
-  <div class="row">
-    <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
-        <span class="ui-float-label" >
-            <input id="float-input-uName" type="text" size="37" pKeyFilter="alphanum" pInputText [(ngModel)]="username"> 
-            <label for="float-inpu-uName">User Name</label>
-        </span>
+<div class="container-fluid mainContainer" style="padding-top:1em;">
+    <div class="row">
+        <div class="col-sm-12">
+            <label>User Name</label>
+            <input type="text" [(ngModel)]="username" name="uName" class="form-control">
+        </div>
     </div>
-  </div>
-  <div class="row" style="padding-top:1.5em;">
-      <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
-          <span class="ui-float-label" >
-              <input pPassword id="float-input-pwd" type="password" size="37" [feedback]=false pInputText [(ngModel)]="userPassword"> 
-              <label for="float-input-pwd">Password</label>
-          </span>
-      </div>
-  </div>
-  <div class="row" style="padding-top:1.5em;">
-    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
-        <button pButton type="button" (click)="performLogin()" label="Log In"></button>
+    <div class="row" style="padding-top:1.5em;">
+        <div class="col-sm-12">
+            <label>Password</label>
+            <input type="password" [(ngModel)]="userPassword" name="pass" class="form-control">
+        </div>
     </div>
-  </div>
+    <div class="row" style="padding-top:1.5em;">
+        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+            <button [disabled]="loading" pButton type="button" (click)="performLogin()" label="Log In"></button>
+            <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+        </div>
+    </div>
 </div>
